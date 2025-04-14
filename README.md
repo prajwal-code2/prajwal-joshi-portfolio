@@ -1,12 +1,16 @@
 
-# Welcome to your Lovable project
+# Prajwal Joshi Portfolio
+
+## Project Overview
+
+This is a personal portfolio website showcasing the professional work and skills of Prajwal Joshi, a Full Stack Developer.
 
 ## Deployment Options
 
 ### GitHub Pages Deployment
 
 1. **Prepare your repository**
-   - Create a new GitHub repository
+   - Create a new GitHub repository named "prajwal-joshi-portfolio"
    - Push your current project to the repository
 
 2. **GitHub Pages Deployment**
@@ -38,19 +42,11 @@
 - Render
 - Cloudflare Pages
 
-Each offers simple, free deployment with GitHub integration.
+## Technologies Used
+- React with TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
 
-## Recommended Deployment Steps
-
-1. Choose a deployment platform
-2. Connect your GitHub repository
-3. Configure build settings:
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Install Command: `npm install`
-
-## Troubleshooting
-If you encounter issues, ensure:
-- All dependencies are correctly installed
-- Build script works locally
-- Repository settings allow GitHub Pages deployment
+## Contact
+For inquiries, please reach out to Prajwal Joshi.
