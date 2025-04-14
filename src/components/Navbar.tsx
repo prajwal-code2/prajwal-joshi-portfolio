@@ -11,17 +11,30 @@ interface NavbarProps {
 const Navbar = ({ className }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      // Determine if we should show/hide the navbar based on scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      // Set scrolled state for background effects
+      setScrolled(currentScrollY > 50);
+      setLastScrollY(currentScrollY);
     };
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Projects", href: "#projects" },
     { name: "Testimonials", href: "#testimonials" },
@@ -33,11 +46,12 @@ const Navbar = ({ className }: NavbarProps) => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-10",
         scrolled ? "bg-background/80 backdrop-blur-md shadow-md" : "bg-transparent",
+        isVisible ? "translate-y-0" : "-translate-y-full",
         className
       )}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <a href="#home" className="text-xl font-bold gradient-text">Portfolio</a>
+        <a href="#home" className="text-xl font-bold gradient-text">PJ</a>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
@@ -46,9 +60,6 @@ const Navbar = ({ className }: NavbarProps) => {
               {link.name}
             </a>
           ))}
-          <Button className="bg-primary text-primary-foreground hover:bg-primary/80">
-            Resume
-          </Button>
         </nav>
         
         {/* Mobile Navigation Toggle */}
@@ -75,9 +86,6 @@ const Navbar = ({ className }: NavbarProps) => {
                 {link.name}
               </a>
             ))}
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
-              Resume
-            </Button>
           </nav>
         </div>
       )}

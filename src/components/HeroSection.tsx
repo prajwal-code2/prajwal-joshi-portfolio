@@ -1,4 +1,5 @@
 
+import { useEffect, useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -7,7 +8,55 @@ interface HeroSectionProps {
   className?: string;
 }
 
+const roles = [
+  "Computer Vision Specialist",
+  "Transforming Pixels into Actionable Insight"
+];
+
 const HeroSection = ({ className }: HeroSectionProps) => {
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isWaiting, setIsWaiting] = useState(false);
+  const typingSpeed = 100; // milliseconds per character
+  const deleteSpeed = 50; // faster deletion
+  const waitTime = 1500; // 1.5 seconds pause
+
+  useEffect(() => {
+    let timer: number;
+    
+    if (isWaiting) {
+      timer = window.setTimeout(() => {
+        setIsWaiting(false);
+        setIsDeleting(true);
+      }, waitTime);
+      return () => clearTimeout(timer);
+    }
+
+    const currentRole = roles[roleIndex];
+    
+    if (isDeleting) {
+      if (displayText === "") {
+        setIsDeleting(false);
+        setRoleIndex((prevIndex) => (prevIndex + 1) % roles.length);
+      } else {
+        timer = window.setTimeout(() => {
+          setDisplayText(displayText.slice(0, -1));
+        }, deleteSpeed);
+      }
+    } else {
+      if (displayText === currentRole) {
+        setIsWaiting(true);
+      } else {
+        timer = window.setTimeout(() => {
+          setDisplayText(currentRole.slice(0, displayText.length + 1));
+        }, typingSpeed);
+      }
+    }
+    
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, roleIndex, isWaiting]);
+
   return (
     <section 
       id="home" 
@@ -26,9 +75,9 @@ const HeroSection = ({ className }: HeroSectionProps) => {
                 <span className="absolute -bottom-1 left-0 h-1 w-full bg-primary/60 rounded-full"></span>
               </span>
             </h1>
-            <h2 className="text-xl md:text-3xl text-muted-foreground">
+            <h2 className="text-xl md:text-3xl text-muted-foreground h-10">
               <span className="relative inline-block">
-                Full Stack Developer
+                {displayText}
                 <span className="absolute -right-4 animate-cursor-blink">|</span>
               </span>
             </h2>
@@ -40,11 +89,11 @@ const HeroSection = ({ className }: HeroSectionProps) => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
-            <Button size="lg" className="group text-lg">
+            <Button size="lg" className="group text-lg" onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}>
               View My Work
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
             </Button>
-            <Button variant="outline" size="lg" className="text-lg">
+            <Button variant="outline" size="lg" className="text-lg" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
               Contact Me
             </Button>
           </div>

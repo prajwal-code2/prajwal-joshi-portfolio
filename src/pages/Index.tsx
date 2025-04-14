@@ -35,6 +35,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-violet-800 to-green-700 opacity-50 -z-20"></div>
       <BlobBackground />
       <ParticleCanvas />
       <Navbar />
