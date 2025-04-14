@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 interface TestimonialsSectionProps {
   className?: string;
@@ -40,39 +41,45 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
       role: "Research Director",
       company: "AILabs",
       image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-      text: "We've worked with many computer vision specialists, but PJ stands out. They not only understood our technical requirements but also grasped our business goals and delivered solutions that perfectly address both aspects."
+      text: "We've worked with many computer vision specialists, but PJ stands out. They not only understood our technical requirements but also grasped our business goals and delivered solutions that perfectly address both aspects. The attention to detail and willingness to go above and beyond made all the difference to our project."
+    },
+    {
+      id: 4,
+      name: "David Kim",
+      role: "CTO",
+      company: "VisionTech",
+      image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857",
+      text: "Exceptional talent! PJ built our entire image recognition system from scratch. Their deep understanding of both theoretical and practical aspects of computer vision is impressive. They're not just a developer but a true technical partner."
+    },
+    {
+      id: 5,
+      name: "Sophia Martinez",
+      role: "Lead Developer",
+      company: "DataSense",
+      image: "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56",
+      text: "I had the pleasure of collaborating with PJ on a complex ML project. Their knowledge of the latest computer vision algorithms and ability to implement them efficiently saved us countless hours of development time."
     },
   ];
 
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const intervalRef = useRef<number>();
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const autoplayIntervalRef = useRef<number>();
 
-  // Auto rotate testimonials
+  // Auto scroll testimonials
   useEffect(() => {
-    intervalRef.current = window.setInterval(() => {
-      setActiveTestimonial((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, 6000);
+    if (!isPaused) {
+      autoplayIntervalRef.current = window.setInterval(() => {
+        setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+      }, 4000);
+    }
     
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+      if (autoplayIntervalRef.current) {
+        clearInterval(autoplayIntervalRef.current);
       }
     };
-  }, [testimonials.length]);
-
-  // Pause rotation on hover
-  const pauseRotation = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-  };
-
-  // Resume rotation when not hovering
-  const resumeRotation = () => {
-    intervalRef.current = window.setInterval(() => {
-      setActiveTestimonial((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, 6000);
-  };
+  }, [isPaused, testimonials.length]);
 
   return (
     <section
@@ -91,63 +98,73 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
           </p>
         </div>
         
-        <div 
-          className="relative max-w-5xl mx-auto"
-          onMouseEnter={pauseRotation}
-          onMouseLeave={resumeRotation}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, index) => (
-              <div 
-                key={testimonial.id} 
-                className={cn(
-                  "glass-panel gradient-border p-6 md:p-8 transition-all duration-500 transform",
-                  index === activeTestimonial 
-                    ? "scale-105 z-10 shadow-xl" 
-                    : "opacity-70 hover:opacity-90"
-                )}
-                onClick={() => setActiveTestimonial(index)}
-              >
-                <div className="relative">
-                  <Quote 
-                    size={36} 
-                    className="absolute -top-4 -left-2 text-primary opacity-40" 
-                  />
-                  
-                  <div className="relative z-10 flex flex-col h-full">
-                    <p className="text-foreground/90 flex-grow mb-6">
-                      {testimonial.text}
-                    </p>
-                    
-                    <div className="flex items-center">
-                      <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+        <div className="relative max-w-5xl mx-auto" ref={carouselRef}>
+          <Carousel 
+            className="w-full"
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+          >
+            <CarouselContent className="py-4">
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem 
+                  key={testimonial.id} 
+                  className="md:basis-1/3 lg:basis-1/3 pl-4"
+                >
+                  <div 
+                    className={cn(
+                      "glass-panel gradient-border p-6 md:p-6 transition-all duration-500 h-full",
+                      index === activeIndex % testimonials.length 
+                        ? "scale-105 z-10 shadow-xl" 
+                        : "opacity-70 hover:opacity-90"
+                    )}
+                    onClick={() => setActiveIndex(index)}
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                  >
+                    <div className="relative">
+                      <Quote 
+                        size={36} 
+                        className="absolute -top-4 -left-2 text-primary opacity-40" 
+                      />
                       
-                      <div>
-                        <div className="font-semibold">{testimonial.name}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {testimonial.role}, {testimonial.company}
+                      <div className="relative z-10 flex flex-col h-full">
+                        <p className="text-foreground/90 mb-6 overflow-hidden">
+                          {testimonial.text}
+                        </p>
+                        
+                        <div className="flex items-center mt-auto">
+                          <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img
+                              src={testimonial.image}
+                              alt={testimonial.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          
+                          <div>
+                            <div className="font-semibold">{testimonial.name}</div>
+                            <div className="text-sm text-muted-foreground">
+                              {testimonial.role}, {testimonial.company}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
           
           <div className="flex justify-center gap-2 mt-10">
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setActiveTestimonial(index)}
+                onClick={() => setActiveIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
-                  index === activeTestimonial ? "bg-primary w-8" : "bg-muted-foreground/30"
+                  index === activeIndex % testimonials.length ? "bg-primary w-8" : "bg-muted-foreground/30"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />

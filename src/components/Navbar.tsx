@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Computer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -51,7 +51,10 @@ const Navbar = ({ className }: NavbarProps) => {
       )}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <a href="#home" className="text-xl font-bold gradient-text">PJ</a>
+        <a href="#home" className="text-2xl font-bold gradient-text flex items-center">
+          <Computer className="mr-1 inline-block" size={22} />
+          <span>PJ</span>
+        </a>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
