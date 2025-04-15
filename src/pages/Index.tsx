@@ -7,8 +7,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import BlobBackground from "@/components/BlobBackground";
-import ParticleCanvas from "@/components/ParticleCanvas";
+import AnimatedGradientBackground from "@/components/AnimatedGradientBackground";
 
 const Index = () => {
   // Smooth scroll function
@@ -35,9 +34,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-violet-800 to-green-700 opacity-50 -z-20"></div>
-      <BlobBackground />
-      <ParticleCanvas />
+      <AnimatedGradientBackground />
       <Navbar />
       <main>
         <HeroSection />

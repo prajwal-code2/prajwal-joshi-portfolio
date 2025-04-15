@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Menu, X, Computer } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,24 +11,16 @@ interface NavbarProps {
 const Navbar = ({ className }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      // Always keep navbar visible but update styling on scroll
-      setIsVisible(true);
-      
-      // Set scrolled state for background effects
       setScrolled(currentScrollY > 50);
-      setLastScrollY(currentScrollY);
     };
     
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const navLinks = [
     { name: "About", href: "#about" },
@@ -39,28 +32,26 @@ const Navbar = ({ className }: NavbarProps) => {
   return (
     <header 
       className={cn(
-        "fixed top-4 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-10 mx-auto max-w-7xl rounded-full shadow-lg border border-border/10",
-        scrolled ? "bg-background/90 backdrop-blur-md" : "bg-background/80 backdrop-blur-sm",
-        isVisible ? "translate-y-0" : "-translate-y-full",
+        "fixed top-4 left-0 right-0 z-50 py-4 px-6 md:px-10 mx-auto max-w-7xl rounded-full shadow-lg border border-border/30",
+        "bg-black/80 backdrop-blur-md",
         className
       )}
       style={{
         width: "calc(100% - 2rem)",
         marginLeft: "auto",
         marginRight: "auto",
-        animation: "float 6s ease-in-out infinite"
       }}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <a href="#home" className="text-3xl font-bold gradient-text flex items-center">
-          <Computer className="mr-2 inline-block" size={28} />
+        <a href="#home" className="text-4xl font-bold gradient-text flex items-center">
+          <Computer className="mr-2 inline-block" size={32} />
           <span>PJ</span>
         </a>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className="nav-link">
+            <a key={link.name} href={link.href} className="nav-link uppercase tracking-wider font-medium">
               {link.name}
             </a>
           ))}

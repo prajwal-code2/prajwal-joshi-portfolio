@@ -61,12 +61,11 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
     },
   ];
 
-  const carouselRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const autoplayIntervalRef = useRef<number>();
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Auto scroll testimonials - now shows all testimonials in a cycling manner
   useEffect(() => {
     if (!isPaused) {
       autoplayIntervalRef.current = window.setInterval(() => {
@@ -98,19 +97,25 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
           </p>
         </div>
         
-        <div className="relative max-w-5xl mx-auto" ref={carouselRef}>
-          <Carousel 
-            className="w-full"
-            opts={{
-              align: "start",
-              loop: true,
-            }}
+        <div className="relative max-w-5xl mx-auto">
+          <div 
+            className="testimonials-container overflow-hidden" 
+            ref={containerRef}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
-            <CarouselContent className="py-4">
+            <div 
+              className="testimonials-slider flex transition-all duration-700 ease-in-out" 
+              style={{ 
+                transform: `translateX(-${activeIndex * 100 / testimonials.length}%)`,
+                width: `${testimonials.length * 100}%` 
+              }}
+            >
               {testimonials.map((testimonial, index) => (
-                <CarouselItem 
-                  key={testimonial.id} 
-                  className="md:basis-1/3 lg:basis-1/3 pl-4"
+                <div 
+                  key={testimonial.id}
+                  className="w-full md:w-1/3 px-4 flex-shrink-0"
+                  style={{ width: `${100 / testimonials.length}%` }}
                 >
                   <div 
                     className={cn(
@@ -120,8 +125,6 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
                         : "opacity-70 hover:opacity-90"
                     )}
                     onClick={() => setActiveIndex(index)}
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
                     style={{
                       transition: "all 0.5s ease",
                       transform: index === activeIndex % testimonials.length ? "scale(1.05)" : "scale(1)",
@@ -158,10 +161,10 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
                       </div>
                     </div>
                   </div>
-                </CarouselItem>
+                </div>
               ))}
-            </CarouselContent>
-          </Carousel>
+            </div>
+          </div>
           
           <div className="flex justify-center gap-2 mt-10">
             {testimonials.map((_, index) => (
@@ -177,6 +180,26 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
           </div>
         </div>
       </div>
+      
+      <style jsx>{`
+        .testimonials-container {
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+        }
+        
+        .testimonials-slider {
+          display: flex;
+          flex-wrap: nowrap;
+          transition: transform 0.7s ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+          .testimonials-slider > div {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

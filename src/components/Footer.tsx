@@ -12,7 +12,7 @@ const Footer = ({ className }: FooterProps) => {
   return (
     <footer 
       className={cn(
-        "py-6 px-6 border-t border-border/30 bg-secondary/20", 
+        "py-4 px-6 border-t border-border/30 bg-black/70 backdrop-blur-sm", 
         className
       )}
     >
