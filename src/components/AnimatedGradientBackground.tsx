@@ -22,30 +22,30 @@ const AnimatedGradientBackground = () => {
 
     // Define gradient colors and positions
     const colors = [
-      [255, 0, 0],    // Red
-      [255, 165, 0],  // Orange
-      [255, 0, 128],  // Pink
+      [255, 0, 128],  // Vivid Pink
       [128, 0, 255],  // Purple
       [0, 0, 255],    // Blue
-      [0, 128, 128],  // Teal
+      [0, 128, 255],  // Sky Blue
+      [0, 255, 255],  // Cyan
+      [255, 0, 255],  // Magenta
     ];
 
     let step = 0;
-    const colorSteps = 0.002; // Speed of color change
+    const colorSteps = 0.0015; // Speed of color change
 
     const drawGradient = () => {
       step += colorSteps;
       
-      // Create dynamic gradient positions
-      const time = Date.now() * 0.0005;
-      const x1 = Math.sin(time) * canvas.width;
-      const y1 = Math.cos(time) * canvas.height;
-      const x2 = Math.cos(time) * canvas.width;
-      const y2 = Math.sin(time) * canvas.height;
+      // Create dynamic gradient positions with more movement
+      const time = Date.now() * 0.0003; // Slower movement for smoother transitions
+      const x1 = Math.sin(time * 0.7) * canvas.width;
+      const y1 = Math.cos(time * 0.6) * canvas.height;
+      const x2 = Math.cos(time * 0.9) * canvas.width;
+      const y2 = Math.sin(time * 0.8) * canvas.height;
       
       const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
       
-      // Add color stops
+      // Add color stops with more vibrant transitions
       for (let i = 0; i < colors.length; i++) {
         const idx1 = i % colors.length;
         const idx2 = (i + 1) % colors.length;
@@ -64,9 +64,23 @@ const AnimatedGradientBackground = () => {
         colors.push(colors.shift() || [0, 0, 0]); // Rotate colors
       }
       
-      // Draw gradient
+      // Draw gradient with subtle opacity effect
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Add a subtle noise effect
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      
+      // Apply a very subtle noise to the image data
+      for (let i = 0; i < data.length; i += 4) {
+        const noise = Math.random() * 5 - 2.5;
+        data[i] = Math.min(255, Math.max(0, data[i] + noise));
+        data[i+1] = Math.min(255, Math.max(0, data[i+1] + noise));
+        data[i+2] = Math.min(255, Math.max(0, data[i+2] + noise));
+      }
+      
+      ctx.putImageData(imageData, 0, 0);
       
       animationFrameId.current = requestAnimationFrame(drawGradient);
     };

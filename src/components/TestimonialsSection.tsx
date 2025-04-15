@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 interface TestimonialsSectionProps {
   className?: string;

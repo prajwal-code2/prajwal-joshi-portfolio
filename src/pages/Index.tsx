@@ -35,8 +35,10 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       <AnimatedGradientBackground />
-      <Navbar />
-      <main>
+      <div className="fixed top-0 left-0 right-0 z-50 bg-secondary/80 backdrop-blur-md border-b border-secondary/50 shadow-md">
+        <Navbar />
+      </div>
+      <main className="pt-20"> {/* Added padding-top to account for fixed navbar */}
         <HeroSection />
         <AboutSection />
         <ProjectsSection />
