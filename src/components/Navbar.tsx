@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Menu, X, Computer } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,12 +17,8 @@ const Navbar = ({ className }: NavbarProps) => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Determine if we should show/hide the navbar based on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
+      // Always keep navbar visible but update styling on scroll
+      setIsVisible(true);
       
       // Set scrolled state for background effects
       setScrolled(currentScrollY > 50);
@@ -44,15 +39,21 @@ const Navbar = ({ className }: NavbarProps) => {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-10",
-        scrolled ? "bg-background/80 backdrop-blur-md shadow-md" : "bg-transparent",
+        "fixed top-4 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-10 mx-auto max-w-7xl rounded-full shadow-lg border border-border/10",
+        scrolled ? "bg-background/90 backdrop-blur-md" : "bg-background/80 backdrop-blur-sm",
         isVisible ? "translate-y-0" : "-translate-y-full",
         className
       )}
+      style={{
+        width: "calc(100% - 2rem)",
+        marginLeft: "auto",
+        marginRight: "auto",
+        animation: "float 6s ease-in-out infinite"
+      }}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <a href="#home" className="text-2xl font-bold gradient-text flex items-center">
-          <Computer className="mr-1 inline-block" size={22} />
+        <a href="#home" className="text-3xl font-bold gradient-text flex items-center">
+          <Computer className="mr-2 inline-block" size={28} />
           <span>PJ</span>
         </a>
         
@@ -77,7 +78,7 @@ const Navbar = ({ className }: NavbarProps) => {
       
       {/* Mobile Navigation Menu */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md shadow-lg py-6 px-6 border-t border-border/30 animate-slide-up">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md shadow-lg py-6 px-6 border-t border-border/30 animate-slide-up mt-4 rounded-xl">
           <nav className="flex flex-col space-y-4">
             {navLinks.map((link) => (
               <a 

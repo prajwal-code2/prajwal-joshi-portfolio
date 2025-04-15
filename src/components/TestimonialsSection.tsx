@@ -66,7 +66,7 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const autoplayIntervalRef = useRef<number>();
 
-  // Auto scroll testimonials
+  // Auto scroll testimonials - now shows all testimonials in a cycling manner
   useEffect(() => {
     if (!isPaused) {
       autoplayIntervalRef.current = window.setInterval(() => {
@@ -122,6 +122,11 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
                     onClick={() => setActiveIndex(index)}
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
+                    style={{
+                      transition: "all 0.5s ease",
+                      transform: index === activeIndex % testimonials.length ? "scale(1.05)" : "scale(1)",
+                      animation: index === activeIndex % testimonials.length ? "float 4s ease-in-out infinite" : "none"
+                    }}
                   >
                     <div className="relative">
                       <Quote 

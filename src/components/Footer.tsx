@@ -12,14 +12,17 @@ const Footer = ({ className }: FooterProps) => {
   return (
     <footer 
       className={cn(
-        "py-6 px-6 border-t border-border/30 bg-secondary/20", // Reduced padding from py-10 to py-6
+        "py-6 px-6 border-t border-border/30 bg-secondary/20", 
         className
       )}
     >
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <a href="#home" className="text-2xl font-bold gradient-text">PJ</a>
+            <a href="#home" className="text-3xl font-bold gradient-text flex items-center">
+              <Computer className="mr-2 inline-block" size={28} />
+              <span>PJ</span>
+            </a>
           </div>
           
           <div className="text-sm text-muted-foreground">
