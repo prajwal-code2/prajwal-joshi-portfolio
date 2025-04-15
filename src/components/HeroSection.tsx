@@ -1,9 +1,8 @@
 
-import { useEffect, useState, useRef } from "react";
-import { ArrowRight, Computer } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import CodeSnippet from "./CodeSnippet";
 
 interface HeroSectionProps {
   className?: string;
@@ -70,7 +69,7 @@ const HeroSection = ({ className }: HeroSectionProps) => {
         <div className="space-y-6 text-center md:text-left">
           <div className="space-y-8"> 
             <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
-              Hello, I'm <span className="gradient-text">Prajwal</span>
+              Hello, I'm <span className="gradient-text border-b-2 border-primary pb-1">Prajwal</span>
             </h1>
             <h2 className="text-xl md:text-3xl text-white min-h-10 mt-6">
               <span className="relative inline-block">
@@ -109,8 +108,6 @@ const HeroSection = ({ className }: HeroSectionProps) => {
           </div>
         </div>
       </div>
-      
-      <CodeSnippet />
       
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block z-10">
         <a href="#about" className="text-white hover:text-primary transition-colors">

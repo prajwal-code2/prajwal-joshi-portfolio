@@ -113,12 +113,12 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
               {testimonials.map((testimonial, index) => (
                 <div 
                   key={testimonial.id}
-                  className="w-full md:w-1/3 px-4 flex-shrink-0"
+                  className="px-4 flex-shrink-0"
                   style={{ width: `${100 / testimonials.length}%` }}
                 >
                   <div 
                     className={cn(
-                      "glass-panel gradient-border p-6 md:p-6 transition-all duration-500 h-full",
+                      "glass-panel gradient-border p-6 transition-all duration-500 h-full",
                       index === activeIndex % testimonials.length 
                         ? "scale-105 z-10 shadow-xl" 
                         : "opacity-70 hover:opacity-90"
@@ -180,8 +180,7 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
         </div>
       </div>
       
-      <style>
-        {`
+      <style jsx>{`
         .testimonials-container {
           overflow: hidden;
           position: relative;
@@ -199,8 +198,7 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
             width: 100% !important;
           }
         }
-        `}
-      </style>
+      `}</style>
     </section>
   );
 };
