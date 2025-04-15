@@ -69,9 +69,8 @@ const HeroSection = ({ className }: HeroSectionProps) => {
       <div className="container mx-auto max-w-4xl relative z-10">
         <div className="space-y-6 text-center md:text-left">
           <div className="space-y-8"> 
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight uppercase text-white drop-shadow-lg">
-              <span className="block">Prajwal</span>
-              <span className="block">Joshi</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
+              Hello, I'm <span className="gradient-text">Prajwal</span>
             </h1>
             <h2 className="text-xl md:text-3xl text-white min-h-10 mt-6">
               <span className="relative inline-block">
