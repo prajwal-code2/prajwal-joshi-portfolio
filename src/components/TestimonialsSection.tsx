@@ -66,12 +66,27 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
   const [itemsPerView, setItemsPerView] = useState(3);
   const autoplayIntervalRef = useRef<number>();
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndices, setActiveIndices] = useState<number[]>([]);
+  const [lastChangedIndex, setLastChangedIndex] = useState<number | null>(null);
 
-  const rotateTestimonials = () => {
-    // Get random testimonials to show
-    const shuffled = [...testimonials].sort(() => 0.5 - Math.random());
-    setVisibleTestimonials(shuffled.slice(0, itemsPerView));
-  };
+  // Initialize active indices based on itemsPerView
+  useEffect(() => {
+    // Get random indices for initial testimonials
+    const initialIndices: number[] = [];
+    while (initialIndices.length < itemsPerView) {
+      const randomIndex = Math.floor(Math.random() * testimonials.length);
+      if (!initialIndices.includes(randomIndex)) {
+        initialIndices.push(randomIndex);
+      }
+    }
+    setActiveIndices(initialIndices);
+  }, [itemsPerView]);
+
+  // Update visible testimonials based on active indices
+  useEffect(() => {
+    const visible = activeIndices.map(index => testimonials[index]);
+    setVisibleTestimonials(visible);
+  }, [activeIndices]);
 
   // Update itemsPerView based on screen size
   useEffect(() => {
@@ -95,17 +110,12 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Initialize visible testimonials
-  useEffect(() => {
-    rotateTestimonials();
-  }, [itemsPerView]);
-
-  // Set up autoplay
+  // Set up autoplay to change one testimonial at a time
   useEffect(() => {
     if (!isPaused) {
       autoplayIntervalRef.current = window.setInterval(() => {
-        rotateTestimonials();
-      }, 5000);
+        rotateOneTestimonial();
+      }, 5000); // Change one testimonial every 5 seconds
     }
     
     return () => {
@@ -113,7 +123,50 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
         clearInterval(autoplayIntervalRef.current);
       }
     };
-  }, [isPaused, itemsPerView]);
+  }, [isPaused, activeIndices, itemsPerView]);
+
+  // Function to rotate just one testimonial
+  const rotateOneTestimonial = () => {
+    if (itemsPerView >= testimonials.length) return;
+
+    // Choose a random position to change (different from the last one if possible)
+    let positionToChange = Math.floor(Math.random() * itemsPerView);
+    
+    // If we have more than one item and this was the last changed, try to pick a different one
+    if (itemsPerView > 1 && positionToChange === lastChangedIndex) {
+      positionToChange = (positionToChange + 1) % itemsPerView;
+    }
+    
+    setLastChangedIndex(positionToChange);
+    
+    // Get a new random testimonial index that isn't currently shown
+    const unusedIndices = Array.from({ length: testimonials.length }, (_, i) => i)
+      .filter(i => !activeIndices.includes(i));
+    
+    if (unusedIndices.length === 0) return; // All testimonials are currently shown
+    
+    const newIndex = unusedIndices[Math.floor(Math.random() * unusedIndices.length)];
+    
+    // Update the active indices by replacing just the one at positionToChange
+    setActiveIndices(prev => {
+      const newIndices = [...prev];
+      newIndices[positionToChange] = newIndex;
+      return newIndices;
+    });
+  };
+
+  // Reset all testimonials at once
+  const resetAllTestimonials = () => {
+    // Get random indices without duplicates
+    const newIndices: number[] = [];
+    while (newIndices.length < itemsPerView) {
+      const randomIndex = Math.floor(Math.random() * testimonials.length);
+      if (!newIndices.includes(randomIndex)) {
+        newIndices.push(randomIndex);
+      }
+    }
+    setActiveIndices(newIndices);
+  };
 
   return (
     <section
@@ -138,9 +191,9 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
           onMouseLeave={() => setIsPaused(false)}
         >
           <div className="flex flex-wrap justify-center gap-6" ref={containerRef}>
-            {visibleTestimonials.map((testimonial) => (
+            {visibleTestimonials.map((testimonial, index) => (
               <div 
-                key={testimonial.id}
+                key={`${testimonial.id}-${index}`}
                 className="testimonial-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] transition-all duration-500"
               >
                 <div 
@@ -185,7 +238,7 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
               variant="outline" 
               size="icon" 
               className="rounded-full"
-              onClick={rotateTestimonials}
+              onClick={resetAllTestimonials}
               aria-label="Refresh testimonials"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-refresh-cw"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
