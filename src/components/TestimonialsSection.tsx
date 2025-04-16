@@ -180,7 +180,8 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
         </div>
       </div>
       
-      <style jsx>{`
+      <style>
+        {`
         .testimonials-container {
           overflow: hidden;
           position: relative;
@@ -198,7 +199,8 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
             width: 100% !important;
           }
         }
-      `}</style>
+        `}
+      </style>
     </section>
   );
 };
