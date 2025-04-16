@@ -29,6 +29,16 @@ const Navbar = ({ className }: NavbarProps) => {
     { name: "Contact", href: "#contact" },
   ];
 
+  const scrollToSection = (href: string) => {
+    const id = href.substring(1);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <header 
       className={cn(
@@ -43,7 +53,14 @@ const Navbar = ({ className }: NavbarProps) => {
       }}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <a href="#home" className="text-4xl font-bold gradient-text flex items-center">
+        <a 
+          href="#home" 
+          className="text-4xl font-bold gradient-text flex items-center"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('#home');
+          }}
+        >
           <Computer className="mr-2 inline-block" size={32} />
           <span>PJ</span>
         </a>
@@ -51,7 +68,15 @@ const Navbar = ({ className }: NavbarProps) => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className="nav-link uppercase tracking-wider font-medium">
+            <a 
+              key={link.name} 
+              href={link.href} 
+              className="nav-link uppercase tracking-wider font-medium"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(link.href);
+              }}
+            >
               {link.name}
             </a>
           ))}
@@ -76,7 +101,11 @@ const Navbar = ({ className }: NavbarProps) => {
                 key={link.name} 
                 href={link.href} 
                 className="text-lg py-2 nav-link"
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(link.href);
+                  setIsOpen(false);
+                }}
               >
                 {link.name}
               </a>

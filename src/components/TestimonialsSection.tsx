@@ -1,7 +1,8 @@
 
 import { useState, useEffect, useRef } from "react";
-import { Quote } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface TestimonialsSectionProps {
   className?: string;
@@ -61,15 +62,50 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
   ];
 
   const [isPaused, setIsPaused] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [visibleTestimonials, setVisibleTestimonials] = useState<Testimonial[]>([]);
+  const [itemsPerView, setItemsPerView] = useState(3);
   const autoplayIntervalRef = useRef<number>();
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const rotateTestimonials = () => {
+    // Get random testimonials to show
+    const shuffled = [...testimonials].sort(() => 0.5 - Math.random());
+    setVisibleTestimonials(shuffled.slice(0, itemsPerView));
+  };
+
+  // Update itemsPerView based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerView(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsPerView(2);
+      } else {
+        setItemsPerView(3);
+      }
+    };
+    
+    // Initial check
+    handleResize();
+    
+    // Set up the event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Clean up
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Initialize visible testimonials
+  useEffect(() => {
+    rotateTestimonials();
+  }, [itemsPerView]);
+
+  // Set up autoplay
   useEffect(() => {
     if (!isPaused) {
       autoplayIntervalRef.current = window.setInterval(() => {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-      }, 4000);
+        rotateTestimonials();
+      }, 5000);
     }
     
     return () => {
@@ -77,7 +113,7 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
         clearInterval(autoplayIntervalRef.current);
       }
     };
-  }, [isPaused, testimonials.length]);
+  }, [isPaused, itemsPerView]);
 
   return (
     <section
@@ -96,109 +132,86 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
           </p>
         </div>
         
-        <div className="relative max-w-5xl mx-auto">
-          <div 
-            className="testimonials-container overflow-hidden" 
-            ref={containerRef}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-          >
-            <div 
-              className="testimonials-slider flex transition-all duration-700 ease-in-out" 
-              style={{ 
-                transform: `translateX(-${activeIndex * 100 / testimonials.length}%)`,
-                width: `${testimonials.length * 100}%` 
-              }}
-            >
-              {testimonials.map((testimonial, index) => (
+        <div 
+          className="relative max-w-5xl mx-auto"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div className="flex flex-wrap justify-center gap-6" ref={containerRef}>
+            {visibleTestimonials.map((testimonial) => (
+              <div 
+                key={testimonial.id}
+                className="testimonial-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] transition-all duration-500"
+              >
                 <div 
-                  key={testimonial.id}
-                  className="px-4 flex-shrink-0"
-                  style={{ width: `${100 / testimonials.length}%` }}
+                  className="glass-panel gradient-border p-6 h-full rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                 >
-                  <div 
-                    className={cn(
-                      "glass-panel gradient-border p-6 transition-all duration-500 h-full",
-                      index === activeIndex % testimonials.length 
-                        ? "scale-105 z-10 shadow-xl" 
-                        : "opacity-70 hover:opacity-90"
-                    )}
-                    onClick={() => setActiveIndex(index)}
-                    style={{
-                      transition: "all 0.5s ease",
-                      transform: index === activeIndex % testimonials.length ? "scale(1.05)" : "scale(1)",
-                      animation: index === activeIndex % testimonials.length ? "float 4s ease-in-out infinite" : "none"
-                    }}
-                  >
-                    <div className="relative">
-                      <Quote 
-                        size={36} 
-                        className="absolute -top-4 -left-2 text-primary opacity-40" 
-                      />
+                  <div className="relative">
+                    <Quote 
+                      size={36} 
+                      className="absolute -top-4 -left-2 text-primary opacity-40" 
+                    />
+                    
+                    <div className="relative z-10 flex flex-col h-full">
+                      <p className="text-foreground/90 mb-6 overflow-hidden">
+                        {testimonial.text}
+                      </p>
                       
-                      <div className="relative z-10 flex flex-col h-full">
-                        <p className="text-foreground/90 mb-6 overflow-hidden">
-                          {testimonial.text}
-                        </p>
+                      <div className="flex items-center mt-auto">
+                        <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                         
-                        <div className="flex items-center mt-auto">
-                          <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img
-                              src={testimonial.image}
-                              alt={testimonial.name}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                          
-                          <div>
-                            <div className="font-semibold">{testimonial.name}</div>
-                            <div className="text-sm text-muted-foreground">
-                              {testimonial.role}, {testimonial.company}
-                            </div>
+                        <div>
+                          <div className="font-semibold">{testimonial.name}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {testimonial.role}, {testimonial.company}
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-          
-          <div className="flex justify-center gap-2 mt-10">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === activeIndex % testimonials.length ? "bg-primary w-8" : "bg-muted-foreground/30"
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
+              </div>
             ))}
+          </div>
+
+          <div className="flex justify-center items-center mt-8 gap-4">
+            <Button 
+              variant="outline" 
+              size="icon" 
+              className="rounded-full"
+              onClick={rotateTestimonials}
+              aria-label="Refresh testimonials"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-refresh-cw"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+            </Button>
           </div>
         </div>
       </div>
       
       <style>
         {`
-        .testimonials-container {
-          overflow: hidden;
-          position: relative;
-          width: 100%;
+        .testimonial-card {
+          opacity: 0;
+          transform: translateY(20px);
+          animation: fadeInUp 0.5s forwards;
         }
         
-        .testimonials-slider {
-          display: flex;
-          flex-wrap: nowrap;
-          transition: transform 0.7s ease-in-out;
-        }
-        
-        @media (max-width: 768px) {
-          .testimonials-slider > div {
-            width: 100% !important;
+        @keyframes fadeInUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
+        
+        .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+        .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+        .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
         `}
       </style>
     </section>
