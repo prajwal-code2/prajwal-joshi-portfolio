@@ -13,19 +13,17 @@ interface Testimonial {
   name: string;
   role: string;
   company: string;
-  image: string;
   text: string;
 }
 
 const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
-  // Real testimonials from your HTML
+  // Real testimonials from the provided data
   const testimonials: Testimonial[] = [
     {
       id: 1,
       name: "Philipp Wagner",
       role: "Client",
       company: "Upwork",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
       text: "The freelancer did a great Job in setting up these two Python notebooks and I can recommend to work with him."
     },
     {
@@ -33,7 +31,6 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
       name: "Mohamed Talib",
       role: "Client",
       company: "Upwork",
-      image: "https://images.unsplash.com/photo-1500673922987-e212871fec22",
       text: "Prajwal is one of the most sincere, smart, and dedicated freelancers I have ever worked with; he was most resourceful, creative, diligent, alert, polite, and always quick to respond! I will hire him again, for sure! The amazing thing about him was his penchant for prefection."
     },
     {
@@ -41,7 +38,6 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
       name: "Kunal Kumar",
       role: "Client",
       company: "Upwork",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
       text: "I had a wonderful experience working with Prajwal. He demonstrated deep expertise in Machine Learning, Convolutional Neural Networks, and Image Processing throughout the project. His commitment to delivering high-quality results and their excellent communication skills made the collaboration highly productive. I would highly recommend Prajwal for any project requiring expertise in these areas."
     },
     {
@@ -49,7 +45,6 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
       name: "Petr Zoul",
       role: "Client",
       company: "Upwork",
-      image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857",
       text: "I was afraid to use upwork, but he pleasantly surprised me, the communication was pleasant and even though I set the rules of what I wanted to do at the beginning and changed them several times over time, he always remodeled the project as I wanted. If I need anything again next time, I will definitely come back to this gentleman."
     },
     {
@@ -57,7 +52,6 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
       name: "Petr Zoul",
       role: "Repeat Client",
       company: "Upwork",
-      image: "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56",
       text: "This was my second time working with the worker and I am again extremely satisfied. If I need advice in the future, I will definitely contact them again."
     },
   ];
@@ -237,7 +231,7 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <p className="text-primary font-medium mb-2">Testimonials</p>
-          <h2 className="text-3xl md:text-4xl font-bold">Loved by Industry Leaders</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Client Feedback</h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
             Don't just take my word for it - hear what my clients have to say about working with me.
           </p>
@@ -273,14 +267,6 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
                       </p>
                       
                       <div className="flex items-center mt-auto">
-                        <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                          <img
-                            src={testimonial.image}
-                            alt={testimonial.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        
                         <div>
                           <div className="font-semibold">{testimonial.name}</div>
                           <div className="text-sm text-muted-foreground">

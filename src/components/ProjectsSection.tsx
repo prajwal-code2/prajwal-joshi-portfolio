@@ -17,33 +17,33 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "E-commerce Platform",
-      description: "A full-featured online store with payment integration",
+      title: "Object Detection System",
+      description: "Real-time vehicle and object detection using YOLO",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
       demoUrl: "#",
-      githubUrl: "#",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      longDescription: "A comprehensive e-commerce solution built with React and Node.js. Features include product catalog, user authentication, shopping cart, order management, and secure payments via Stripe integration. The platform is fully responsive and optimized for all devices."
+      githubUrl: "https://github.com/prajwal-code2",
+      technologies: ["YOLO", "OpenCV", "Python", "Computer Vision"],
+      longDescription: "A comprehensive object detection solution built with YOLO and OpenCV. This system provides real-time detection and classification of vehicles and other objects with high accuracy. The implementation uses optimized algorithms to ensure low latency and high throughput, making it suitable for traffic monitoring and security applications."
     },
     {
       id: 2,
-      title: "Task Management App",
-      description: "A productivity tool for teams to manage projects efficiently",
+      title: "Parking Time Monitor",
+      description: "Automated tracking of parking duration with alerts",
       image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
       demoUrl: "#",
-      githubUrl: "#",
-      technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
-      longDescription: "A robust task management application designed for teams. Features include project creation, task assignment, progress tracking, and real-time notifications. Built with Next.js and TypeScript for optimal performance and type safety, with a PostgreSQL database managed through Prisma ORM."
+      githubUrl: "https://github.com/prajwal-code2",
+      technologies: ["OpenCV", "MQTT", "Python", "Computer Vision"],
+      longDescription: "An intelligent parking management system that monitors vehicle duration in parking spaces and triggers alerts for violations. The solution uses computer vision techniques to identify parking spots, detect vehicles, and track their presence over time. MQTT protocol is used for efficient communication between system components, enabling real-time notifications and seamless integration with existing parking management infrastructure."
     },
     {
       id: 3,
-      title: "Personal Finance Dashboard",
-      description: "Visualize and manage your finances with interactive charts",
+      title: "Pill Counting Automation",
+      description: "High-speed pill detection for packaging systems",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
       demoUrl: "#",
-      githubUrl: "#",
-      technologies: ["Vue.js", "D3.js", "Firebase", "Tailwind CSS"],
-      longDescription: "An intuitive finance tracking dashboard built using Vue.js and D3.js for data visualization. Users can track expenses, set budgets, and visualize spending patterns through interactive charts. The application uses Firebase for authentication and real-time database, with a responsive design implemented using Tailwind CSS."
+      githubUrl: "https://github.com/prajwal-code2",
+      technologies: ["Edge Computing", "OpenCV", "YOLO (Ultralytics)", "OrangePi", "ESP32CAM", "Groov Vision"],
+      longDescription: "A sophisticated pill counting system for pharmaceutical packaging operations. This solution employs ultralytics YOLO for accurate detection and counting of pills at high speeds. The system is deployed on edge devices including OrangePi and ESP32CAM, with optional Groov Vision integration. The solution achieves exceptional accuracy even with varying pill shapes, sizes, and colors, while maintaining high throughput required for industrial applications."
     },
   ];
 
@@ -69,7 +69,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
           <p className="text-primary font-medium mb-2">My Work</p>
           <h2 className="text-3xl md:text-4xl font-bold">Featured Projects</h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            A showcase of my recent work, including web applications, design projects, and experiments.
+            A showcase of my computer vision projects, transforming visual data into actionable insights.
           </p>
         </div>
         

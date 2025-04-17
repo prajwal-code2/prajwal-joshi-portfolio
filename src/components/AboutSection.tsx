@@ -8,10 +8,10 @@ interface AboutSectionProps {
 
 const AboutSection = ({ className }: AboutSectionProps) => {
   const skills = [
-    { icon: Code, name: "Frontend", description: "React, NextJS, TypeScript, Tailwind CSS" },
-    { icon: Laptop, name: "Backend", description: "Node.js, Express, Python, PostgreSQL" },
-    { icon: Palette, name: "Design", description: "Figma, Responsive Design, UI/UX" },
-    { icon: Sparkles, name: "Other", description: "Git, Docker, CI/CD, AWS" },
+    { icon: Code, name: "Computer Vision", description: "YOLO, Object Detection, Object Tracking, Action Recognition" },
+    { icon: Laptop, name: "Programming", description: "Python, OpenCV, TensorFlow, Data Analytics" },
+    { icon: Palette, name: "Development", description: "Edge Computing, Automation, MQTT" },
+    { icon: Sparkles, name: "Tools", description: "Linux, GitHub, VSCode" },
   ];
 
   return (
@@ -28,25 +28,23 @@ const AboutSection = ({ className }: AboutSectionProps) => {
             <div>
               <p className="text-primary font-medium mb-2">About Me</p>
               <h2 className="text-3xl md:text-4xl font-bold">
-                A passionate developer creating amazing digital experiences
+                Computer Vision Expert
               </h2>
             </div>
             
             <div className="space-y-4 text-muted-foreground">
               <p>
-                Hello! I'm Alex, a Full Stack Developer based in San Francisco. 
-                I enjoy building everything from small business sites to rich 
-                interactive web applications.
+                I'm Prajwal Joshi, a passionate Computer Vision Expert. With a mission to transform raw visual data into powerful, 
+                actionable insights, I leverage cutting-edge techniques in object detection, tracking, and automation.
               </p>
               <p>
-                With 5+ years of experience in web development, I specialize in
-                creating fast, accessible, and responsive websites with smooth
-                user experiences. I'm always learning and exploring new
-                technologies to stay at the forefront of web development.
+                Holding a Deep Learning Specialization and an Advanced Computer Vision Certification, I've pioneered solutions 
+                like real-time parking monitoring systems and high-speed pill-counting automation, driving precision and innovation 
+                in every project.
               </p>
               <p>
-                When I'm not coding, you'll find me hiking, playing chess, or 
-                experimenting with new recipes in the kitchen.
+                Currently serving as Head of Technology at Insight Fusion Analytics since June 2024, I've also collaborated on 
+                numerous client projects through Upwork.
               </p>
             </div>
           </div>
