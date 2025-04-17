@@ -19,7 +19,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 1,
       title: "Object Detection System",
       description: "Real-time vehicle and object detection using YOLO",
-      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
+      image: "/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png",
       demoUrl: "#",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["YOLO", "OpenCV", "Python", "Computer Vision"],
@@ -29,7 +29,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 2,
       title: "Parking Time Monitor",
       description: "Automated tracking of parking duration with alerts",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+      image: "/lovable-uploads/c097e0a9-b1e1-4362-bb1a-0b3b2fffb215.png",
       demoUrl: "#",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["OpenCV", "MQTT", "Python", "Computer Vision"],
@@ -39,7 +39,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 3,
       title: "Pill Counting Automation",
       description: "High-speed pill detection for packaging systems",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+      image: "/lovable-uploads/e44aa647-c90b-45ec-bd25-acd3f9db8094.png",
       demoUrl: "#",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["Edge Computing", "OpenCV", "YOLO (Ultralytics)", "OrangePi", "ESP32CAM", "Groov Vision"],
@@ -88,8 +88,8 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
               </div>
               
               <div className="p-6 space-y-4">
-                <h3 className="text-xl font-semibold">{project.title}</h3>
-                <p className="text-muted-foreground">{project.description}</p>
+                <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+                <p className="text-primary/90 font-medium">{project.description}</p>
                 
                 <div className="flex flex-wrap gap-2 py-2">
                   {project.technologies.slice(0, 3).map((tech) => (

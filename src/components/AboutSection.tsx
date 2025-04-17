@@ -8,10 +8,26 @@ interface AboutSectionProps {
 
 const AboutSection = ({ className }: AboutSectionProps) => {
   const skills = [
-    { icon: Code, name: "Computer Vision", description: "YOLO, Object Detection, Object Tracking, Action Recognition" },
-    { icon: Laptop, name: "Programming", description: "Python, OpenCV, TensorFlow, Data Analytics" },
-    { icon: Palette, name: "Development", description: "Edge Computing, Automation, MQTT" },
-    { icon: Sparkles, name: "Tools", description: "Linux, GitHub, VSCode" },
+    { 
+      icon: Code, 
+      name: "Computer Vision", 
+      description: "YOLO, Object Detection, Object Tracking, Action Recognition" 
+    },
+    { 
+      icon: Laptop, 
+      name: "Programming", 
+      description: "Python, OpenCV, TensorFlow, Data Analytics" 
+    },
+    { 
+      icon: Palette, 
+      name: "Development", 
+      description: "Edge Computing, Automation, MQTT" 
+    },
+    { 
+      icon: Sparkles, 
+      name: "Tools", 
+      description: "Linux, GitHub, VSCode, Raspberry Pi, OrangePi" 
+    },
   ];
 
   return (

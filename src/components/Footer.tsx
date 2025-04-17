@@ -33,11 +33,15 @@ const Footer = ({ className }: FooterProps) => {
             <a href="https://www.upwork.com/freelancers/~0158b40f97683abbe7?mp_source=share" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors flex items-center"
               aria-label="Upwork profile"
             >
-              <span className="sr-only">Upwork</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 7.5V12h-4.5"></path><path d="M18 12L22 16"></path><path d="M2 19h18v2H2z"></path><path d="M2 14h18v2H2z"></path><path d="M2 3v11l3.5-4.5L10 14V3z"></path></svg>
+              <img 
+                src="/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png" 
+                alt="Upwork" 
+                className="w-5 h-5 mr-1" 
+              />
+              <span>Upwork</span>
             </a>
           </div>
         </div>

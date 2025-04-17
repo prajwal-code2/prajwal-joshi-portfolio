@@ -5,22 +5,67 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 interface ContactSectionProps {
   className?: string;
 }
 
+interface FormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
 const ContactSection = ({ className }: ContactSectionProps) => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: ""
+    }
+  });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
-    });
-    // Reset form
-    (e.target as HTMLFormElement).reset();
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    
+    try {
+      // Create mailto URL with form data
+      const recipientEmail = "prajwaljoshi421@gmail.com";
+      const subject = encodeURIComponent(data.subject);
+      const body = encodeURIComponent(
+        `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
+      );
+      
+      const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+      
+      // Open email client
+      window.open(mailtoUrl, "_blank");
+      
+      // Show success message
+      toast({
+        title: "Message ready to send!",
+        description: "Your email client has been opened with your message.",
+      });
+      
+      // Reset form
+      reset();
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact me directly at prajwaljoshi421@gmail.com.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -97,22 +142,27 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center rounded-lg bg-secondary/70 text-muted-foreground hover:text-primary hover:bg-secondary transition-colors"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 7.5V12h-4.5"></path><path d="M18 12L22 16"></path><path d="M2 19h18v2H2z"></path><path d="M2 14h18v2H2z"></path><path d="M2 3v11l3.5-4.5L10 14V3z"></path></svg>
+                <img 
+                  src="/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png" 
+                  alt="Upwork" 
+                  className="w-5 h-5"
+                />
               </a>
             </div>
           </div>
           
           <div className="glass-panel gradient-border p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">Name</label>
                   <Input
                     id="name"
                     placeholder="John Doe"
-                    required
                     className="bg-secondary/50 border-secondary/60"
+                    {...register("name", { required: "Name is required" })}
                   />
+                  {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium">Email</label>
@@ -120,9 +170,16 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                     id="email"
                     type="email"
                     placeholder="john@example.com"
-                    required
                     className="bg-secondary/50 border-secondary/60"
+                    {...register("email", { 
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Invalid email address"
+                      }
+                    })}
                   />
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                 </div>
               </div>
               
@@ -131,9 +188,10 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 <Input
                   id="subject"
                   placeholder="Project Inquiry"
-                  required
                   className="bg-secondary/50 border-secondary/60"
+                  {...register("subject", { required: "Subject is required" })}
                 />
+                {errors.subject && <p className="text-red-500 text-xs mt-1">{errors.subject.message}</p>}
               </div>
               
               <div className="space-y-2">
@@ -142,13 +200,14 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                   id="message"
                   placeholder="Tell me about your project..."
                   rows={5}
-                  required
                   className="bg-secondary/50 border-secondary/60 resize-none"
+                  {...register("message", { required: "Message is required" })}
                 />
+                {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
               </div>
               
-              <Button type="submit" className="w-full gap-2">
-                Send Message
+              <Button type="submit" className="w-full gap-2" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : "Send Message"}
                 <Send size={16} />
               </Button>
             </form>

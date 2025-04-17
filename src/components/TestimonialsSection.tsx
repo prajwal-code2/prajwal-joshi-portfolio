@@ -1,8 +1,9 @@
 
 import { useState, useEffect, useRef } from "react";
-import { Quote } from "lucide-react";
+import { Quote, RefreshCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface TestimonialsSectionProps {
   className?: string;
@@ -220,6 +221,15 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
     return "";
   };
 
+  // Get initials for avatar
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(part => part[0])
+      .join('')
+      .toUpperCase();
+  };
+
   return (
     <section
       id="testimonials"
@@ -262,14 +272,19 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
                     />
                     
                     <div className="relative z-10 flex flex-col h-full">
-                      <p className="text-foreground/90 mb-6 overflow-hidden">
+                      <p className="text-white mb-6 overflow-hidden">
                         {testimonial.text}
                       </p>
                       
                       <div className="flex items-center mt-auto">
+                        <Avatar className="h-10 w-10 mr-3 bg-primary/20">
+                          <AvatarFallback className="text-primary font-semibold">
+                            {getInitials(testimonial.name)}
+                          </AvatarFallback>
+                        </Avatar>
                         <div>
-                          <div className="font-semibold">{testimonial.name}</div>
-                          <div className="text-sm text-muted-foreground">
+                          <div className="font-semibold text-white">{testimonial.name}</div>
+                          <div className="text-sm text-primary font-medium">
                             {testimonial.role}, {testimonial.company}
                           </div>
                         </div>
@@ -290,7 +305,7 @@ const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
               disabled={isAnimating}
               aria-label="Refresh testimonials"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-refresh-cw"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+              <RefreshCw size={18} />
             </Button>
           </div>
         </div>
