@@ -18,46 +18,47 @@ interface Testimonial {
 }
 
 const TestimonialsSection = ({ className }: TestimonialsSectionProps) => {
+  // Real testimonials from your HTML
   const testimonials: Testimonial[] = [
     {
       id: 1,
-      name: "Sarah Johnson",
-      role: "Product Manager",
-      company: "TechCorp",
+      name: "Philipp Wagner",
+      role: "Client",
+      company: "Upwork",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-      text: "Working with PJ was a fantastic experience. They delivered our project ahead of schedule and the quality of work exceeded our expectations. Their attention to detail and problem-solving skills are outstanding."
+      text: "The freelancer did a great Job in setting up these two Python notebooks and I can recommend to work with him."
     },
     {
       id: 2,
-      name: "Michael Chen",
-      role: "CEO",
-      company: "StartupX",
+      name: "Mohamed Talib",
+      role: "Client",
+      company: "Upwork",
       image: "https://images.unsplash.com/photo-1500673922987-e212871fec22",
-      text: "PJ transformed our computer vision pipeline completely. The model performance is exceptional, and our detection accuracy has increased by 40%. I highly recommend their services to anyone looking for a skilled CV specialist."
+      text: "Prajwal is one of the most sincere, smart, and dedicated freelancers I have ever worked with; he was most resourceful, creative, diligent, alert, polite, and always quick to respond! I will hire him again, for sure! The amazing thing about him was his penchant for prefection."
     },
     {
       id: 3,
-      name: "Emily Rodriguez",
-      role: "Research Director",
-      company: "AILabs",
+      name: "Kunal Kumar",
+      role: "Client",
+      company: "Upwork",
       image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-      text: "We've worked with many computer vision specialists, but PJ stands out. They not only understood our technical requirements but also grasped our business goals and delivered solutions that perfectly address both aspects. The attention to detail and willingness to go above and beyond made all the difference to our project."
+      text: "I had a wonderful experience working with Prajwal. He demonstrated deep expertise in Machine Learning, Convolutional Neural Networks, and Image Processing throughout the project. His commitment to delivering high-quality results and their excellent communication skills made the collaboration highly productive. I would highly recommend Prajwal for any project requiring expertise in these areas."
     },
     {
       id: 4,
-      name: "David Kim",
-      role: "CTO",
-      company: "VisionTech",
+      name: "Petr Zoul",
+      role: "Client",
+      company: "Upwork",
       image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857",
-      text: "Exceptional talent! PJ built our entire image recognition system from scratch. Their deep understanding of both theoretical and practical aspects of computer vision is impressive. They're not just a developer but a true technical partner."
+      text: "I was afraid to use upwork, but he pleasantly surprised me, the communication was pleasant and even though I set the rules of what I wanted to do at the beginning and changed them several times over time, he always remodeled the project as I wanted. If I need anything again next time, I will definitely come back to this gentleman."
     },
     {
       id: 5,
-      name: "Sophia Martinez",
-      role: "Lead Developer",
-      company: "DataSense",
+      name: "Petr Zoul",
+      role: "Repeat Client",
+      company: "Upwork",
       image: "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56",
-      text: "I had the pleasure of collaborating with PJ on a complex ML project. Their knowledge of the latest computer vision algorithms and ability to implement them efficiently saved us countless hours of development time."
+      text: "This was my second time working with the worker and I am again extremely satisfied. If I need advice in the future, I will definitely contact them again."
     },
   ];
 
