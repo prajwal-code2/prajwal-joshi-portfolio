@@ -26,7 +26,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
   
   // Initialize EmailJS on component mount
   useEffect(() => {
-    emailjs.init("Replace_With_Your_User_ID");
+    emailjs.init("YOUR_USER_ID");
   }, []);
   
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
@@ -45,22 +45,23 @@ const ContactSection = ({ className }: ContactSectionProps) => {
       // Prepare the template parameters
       const templateParams = {
         from_name: data.name,
-        reply_to: data.email,
+        from_email: data.email,
+        to_email: "prajwaljoshi421@gmail.com",
         subject: data.subject,
         message: data.message
       };
       
       // Send the email using EmailJS
       await emailjs.send(
-        "Replace_With_Your_Service_ID", 
-        "Replace_With_Your_Template_ID", 
+        "YOUR_SERVICE_ID", 
+        "YOUR_TEMPLATE_ID", 
         templateParams
       );
       
       // Show success message
       toast({
         title: "Message sent",
-        description: "Your message has been sent successfully. I'll get back to you soon.",
+        description: "Your message has been sent successfully. Prajwal will get back to you soon.",
       });
       
       // Reset form
