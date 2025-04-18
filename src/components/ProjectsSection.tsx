@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -19,7 +18,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 1,
       title: "Object Detection System",
       description: "Real-time vehicle and object detection using YOLO",
-      image: "/lovable-uploads/e44aa647-c90b-45ec-bd25-acd3f9db8094.png", // Object detection image
+      image: "/lovable-uploads/4eac47c9-30f3-4758-8a31-250e9f79a30b.png", // object-detection.jpg
       demoUrl: "#",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["YOLO", "OpenCV", "Python", "Computer Vision"],
@@ -29,7 +28,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 2,
       title: "Parking Time Monitor",
       description: "Automated tracking of parking duration with alerts",
-      image: "/lovable-uploads/c097e0a9-b1e1-4362-bb1a-0b3b2fffb215.png", // Parking monitor image
+      image: "/lovable-uploads/501746e3-a9de-4ec5-b4ac-547ef63db4dd.png", // parking-automation.jpg
       demoUrl: "#",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["OpenCV", "MQTT", "Python", "Computer Vision"],
@@ -39,7 +38,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 3,
       title: "Pill Counting Automation",
       description: "High-speed pill detection for packaging systems",
-      image: "/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png", // Pill counting image
+      image: "/lovable-uploads/70795a08-e3a0-49f3-b155-453b83458b3e.png", // pill-counter.jpg
       demoUrl: "#",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["Edge Computing", "OpenCV", "YOLO (Ultralytics)", "OrangePi", "ESP32CAM", "Groov Vision"],
