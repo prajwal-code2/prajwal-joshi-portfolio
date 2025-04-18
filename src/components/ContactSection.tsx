@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import emailjs from 'emailjs-com';
 
 interface ContactSectionProps {
   className?: string;
@@ -23,6 +24,11 @@ const ContactSection = ({ className }: ContactSectionProps) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
+  // Initialize EmailJS on component mount
+  useEffect(() => {
+    emailjs.init("Replace_With_Your_User_ID");
+  }, []);
+  
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
     defaultValues: {
       name: "",
@@ -36,20 +42,25 @@ const ContactSection = ({ className }: ContactSectionProps) => {
     setIsSubmitting(true);
     
     try {
-      // Create mailto URL with form data
-      const recipientEmail = "prajwaljoshi421@gmail.com";
-      const subject = encodeURIComponent(data.subject || "Portfolio Inquiry");
-      const body = encodeURIComponent(
-        `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
-      );
+      // Prepare the template parameters
+      const templateParams = {
+        from_name: data.name,
+        reply_to: data.email,
+        subject: data.subject,
+        message: data.message
+      };
       
-      // Open default email client with pre-filled details
-      window.open(`mailto:${recipientEmail}?subject=${subject}&body=${body}`, '_blank');
+      // Send the email using EmailJS
+      await emailjs.send(
+        "Replace_With_Your_Service_ID", 
+        "Replace_With_Your_Template_ID", 
+        templateParams
+      );
       
       // Show success message
       toast({
-        title: "Message prepared",
-        description: "Your email client has been opened with the message. Please send the email from your client.",
+        title: "Message sent",
+        description: "Your message has been sent successfully. I'll get back to you soon.",
       });
       
       // Reset form
@@ -57,8 +68,8 @@ const ContactSection = ({ className }: ContactSectionProps) => {
     } catch (error) {
       console.error("Error sending email:", error);
       toast({
-        title: "Error preparing message",
-        description: "Please contact me directly at prajwaljoshi421@gmail.com",
+        title: "Error sending message",
+        description: "There was an error sending your message. Please try again later.",
         variant: "destructive"
       });
     } finally {
@@ -178,7 +189,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
               </div>
               
               <Button type="submit" className="w-full gap-2" disabled={isSubmitting}>
-                {isSubmitting ? "Preparing Email..." : "Send Message"}
+                {isSubmitting ? "Sending Message..." : "Send Message"}
                 <Send size={16} />
               </Button>
             </form>
