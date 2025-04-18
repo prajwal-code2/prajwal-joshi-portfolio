@@ -19,7 +19,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 1,
       title: "Object Detection System",
       description: "Real-time vehicle and object detection using YOLO",
-      image: "/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png",
+      image: "/lovable-uploads/e44aa647-c90b-45ec-bd25-acd3f9db8094.png", // Object detection image
       demoUrl: "#",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["YOLO", "OpenCV", "Python", "Computer Vision"],
@@ -29,7 +29,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 2,
       title: "Parking Time Monitor",
       description: "Automated tracking of parking duration with alerts",
-      image: "/lovable-uploads/c097e0a9-b1e1-4362-bb1a-0b3b2fffb215.png",
+      image: "/lovable-uploads/c097e0a9-b1e1-4362-bb1a-0b3b2fffb215.png", // Parking monitor image
       demoUrl: "#",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["OpenCV", "MQTT", "Python", "Computer Vision"],
@@ -39,7 +39,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 3,
       title: "Pill Counting Automation",
       description: "High-speed pill detection for packaging systems",
-      image: "/lovable-uploads/e44aa647-c90b-45ec-bd25-acd3f9db8094.png",
+      image: "/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png", // Pill counting image
       demoUrl: "#",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["Edge Computing", "OpenCV", "YOLO (Ultralytics)", "OrangePi", "ESP32CAM", "Groov Vision"],
