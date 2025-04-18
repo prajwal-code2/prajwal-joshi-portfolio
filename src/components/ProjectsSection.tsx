@@ -89,7 +89,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
               
               <div className="p-6 space-y-4">
                 <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-                <p className="text-primary/90 font-medium">{project.description}</p>
+                <p className="text-primary text-md font-medium">{project.description}</p>
                 
                 <div className="flex flex-wrap gap-2 py-2">
                   {project.technologies.slice(0, 3).map((tech) => (

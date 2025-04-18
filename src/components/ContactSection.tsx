@@ -38,20 +38,18 @@ const ContactSection = ({ className }: ContactSectionProps) => {
     try {
       // Create mailto URL with form data
       const recipientEmail = "prajwaljoshi421@gmail.com";
-      const subject = encodeURIComponent(data.subject);
+      const subject = encodeURIComponent(data.subject || "Portfolio Inquiry");
       const body = encodeURIComponent(
         `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
       );
       
-      const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
-      
-      // Open email client
-      window.open(mailtoUrl, "_blank");
+      // Using direct mailto protocol to open email client
+      window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
       
       // Show success message
       toast({
-        title: "Message ready to send!",
-        description: "Your email client has been opened with your message.",
+        title: "Message sent!",
+        description: "Your email client has been opened. Please send the email that was created for you.",
       });
       
       // Reset form
@@ -60,7 +58,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
       console.error("Error sending email:", error);
       toast({
         title: "Error sending message",
-        description: "Please try again or contact me directly at prajwaljoshi421@gmail.com.",
+        description: "Please try contacting me directly at prajwaljoshi421@gmail.com",
         variant: "destructive"
       });
     } finally {
@@ -94,7 +92,11 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 </div>
                 <div>
                   <h3 className="font-medium">Email</h3>
-                  <p className="text-muted-foreground mt-1">prajwaljoshi421@gmail.com</p>
+                  <p className="text-muted-foreground mt-1">
+                    <a href="mailto:prajwaljoshi421@gmail.com" className="hover:text-primary transition-colors">
+                      prajwaljoshi421@gmail.com
+                    </a>
+                  </p>
                 </div>
               </div>
               
