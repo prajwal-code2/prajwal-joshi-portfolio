@@ -69,7 +69,8 @@ const HeroSection = ({ className }: HeroSectionProps) => {
         <div className="space-y-6 text-center md:text-left">
           <div className="space-y-8"> 
             <h1 className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg">
-              Hello, I'm <span className="gradient-text border-b-2 border-primary pb-1">Prajwal Joshi</span>
+{/*               border-b-2 border-primary pb-1 */}
+              Hello, I'm <span className="gradient-text">Prajwal Joshi</span>
             </h1>
             <h2 className="text-xl md:text-3xl text-white min-h-10 mt-6">
               <span className="relative inline-block">
