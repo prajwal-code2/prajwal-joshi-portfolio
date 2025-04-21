@@ -134,7 +134,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                       aria-label="GitHub"
                       className="hover:text-primary transition-colors flex items-center"
                     >
-                      <Github size={30} />
+                      <Github size={36} />
                     </a>
                     <a
                       href="https://www.linkedin.com/in/prajwal-joshi-570935165/"
@@ -143,7 +143,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                       aria-label="LinkedIn"
                       className="hover:text-primary transition-colors flex items-center"
                     >
-                      <Linkedin size={24} />
+                      <Linkedin size={36} />
                     </a>
                     <a
                       href="https://www.upwork.com/freelancers/~0158b40f97683abbe7?mp_source=share"
@@ -155,7 +155,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                       <img
                         src="/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png"
                         alt="Upwork"
-                        className="w-6 h-6"
+                        className="w-9 h-9"
                       />
                     </a>
                   </div>
