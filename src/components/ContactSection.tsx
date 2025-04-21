@@ -127,8 +127,8 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 <div className="flex flex-col">
                   <h3 className="font-medium">Location</h3>
                   <p className="text-muted-foreground mt-1">Noida, India</p>
-
-                  {/* Icon row moved below location with bigger icons and aligned left with location icon */}
+                </div>
+                {/* Icon row moved below location with bigger icons and aligned left with location icon */}
                 <div className="flex flex-row gap-6 mt-6">
                   <a
                     href="https://github.com/prajwal-code2"
@@ -161,7 +161,6 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                       className="w-9 h-9"
                     />
                   </a>
-                </div>
                 </div>
               </div>
             </div>
