@@ -20,6 +20,7 @@ export default {
     },
     extend: {
       colors: {
+        nightshade: "#0A1123",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
