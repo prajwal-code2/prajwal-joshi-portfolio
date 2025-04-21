@@ -93,6 +93,9 @@ const ContactSection = ({ className }: ContactSectionProps) => {
 
             <div className="space-y-6 mt-4">
               <div className="flex items-start gap-4">
+                <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
+                   <Mail size={20} />
+                 </div>
                 {/* Removed Mail icon and email icon block as per user request */}
                 <div>
                   <h3 className="font-medium">Email</h3>
