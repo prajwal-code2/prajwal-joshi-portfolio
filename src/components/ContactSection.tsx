@@ -1,4 +1,13 @@
 
+// Changes summary:
+// - Prevent default form submission that causes redirect by adding e.preventDefault() at start of handleSubmit (already there, but let's isolate potential cause)
+// - Fix formsubmit.co request to use fetch and prevent redirect by setting proper headers and options (already done)
+// - Confirm no form action or target attribute to avoid opening new tab (remove if any)
+// - Add icons below location info section
+// Note: The form code already uses fetch inside handleSubmit with preventDefault, so the redirect likely happens because of formsubmit.co behavior when the request is not properly handled.
+// We will ensure no form action attribute is used on form tag; also confirm that onSubmit is handled properly with async fetch.
+// Add social icons block below Location block in the right column.
+
 import { Mail, MapPin, Phone, Send, Github, Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -34,9 +43,9 @@ const ContactSection = ({ className }: ContactSectionProps) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
-      // Send form data to formsubmit.co
+      // Send form data to formsubmit.co using POST via fetch to prevent default redirect behavior
       const response = await fetch("https://formsubmit.co/ajax/prajwaljoshi421@gmail.com", {
         method: "POST",
         headers: {
@@ -45,15 +54,13 @@ const ContactSection = ({ className }: ContactSectionProps) => {
         },
         body: JSON.stringify(formData)
       });
-      
+
       if (response.ok) {
-        // Show success toast
         toast({
           title: "Message sent",
           description: "Your message has been sent successfully. Prajwal will get back to you soon."
         });
-        
-        // Reset form data
+
         setFormData({
           name: "",
           email: "",
@@ -64,7 +71,6 @@ const ContactSection = ({ className }: ContactSectionProps) => {
         throw new Error("Failed to send message");
       }
     } catch (error) {
-      // Show error toast
       toast({
         title: "Error",
         description: "There was an error submitting your message. Please try again later.",
@@ -164,6 +170,41 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 <div>
                   <h3 className="font-medium">Location</h3>
                   <p className="text-muted-foreground mt-1">Noida, India</p>
+
+                  {/* Additional social icons below Location */}
+                  <div className="flex flex-row gap-6 mt-4">
+                    <a
+                      href="https://github.com/prajwal-code2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="GitHub"
+                      className="hover:text-primary transition-colors"
+                    >
+                      <Github size={28} />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/prajwal-joshi-570935165/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn"
+                      className="hover:text-primary transition-colors"
+                    >
+                      <Linkedin size={28} />
+                    </a>
+                    <a
+                      href="https://www.upwork.com/freelancers/~0158b40f97683abbe7?mp_source=share"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Upwork"
+                      className="hover:text-primary transition-colors"
+                    >
+                      <img
+                        src="/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png"
+                        alt="Upwork"
+                        className="w-6 h-6"
+                      />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -171,7 +212,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
 
           <div className="glass-panel gradient-border p-8">
             {/* Contact form using fetch */}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} noValidate>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
@@ -252,3 +293,4 @@ const ContactSection = ({ className }: ContactSectionProps) => {
 };
 
 export default ContactSection;
+
