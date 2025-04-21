@@ -42,8 +42,9 @@ const Navbar = ({ className }: NavbarProps) => {
   return (
     <header 
       className={cn(
-        "fixed top-4 left-0 right-0 z-50 py-4 px-6 md:px-10 mx-auto max-w-7xl rounded-full shadow-lg border border-border/100",
-        "bg-nightshade/70 backdrop-blur-md", // Darker background that matches the site theme
+        "fixed top-4 left-0 right-0 z-50 py-4 px-6 md:px-10 mx-auto max-w-7xl rounded-full",
+        "bg-nightshade/70 backdrop-blur-md",
+        "border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]",
         className
       )}
       style={{
