@@ -1,81 +1,37 @@
 
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Github, Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
-import emailjs from 'emailjs-com';
+import { useState } from "react";
 
 interface ContactSectionProps {
   className?: string;
 }
 
-interface FormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
-
 const ContactSection = ({ className }: ContactSectionProps) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  // Initialize EmailJS on component mount
-  useEffect(() => {
-    emailjs.init("YOUR_USER_ID");
-  }, []);
-  
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
-    defaultValues: {
-      name: "",
-      email: "",
-      subject: "",
-      message: ""
-    }
-  });
 
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    
-    try {
-      // Prepare the template parameters
-      const templateParams = {
-        from_name: data.name,
-        from_email: data.email,
-        to_email: "prajwaljoshi421@gmail.com",
-        subject: data.subject,
-        message: data.message
-      };
-      
-      // Send the email using EmailJS
-      await emailjs.send(
-        "YOUR_SERVICE_ID", 
-        "YOUR_TEMPLATE_ID", 
-        templateParams
-      );
-      
-      // Show success message
-      toast({
-        title: "Message sent",
-        description: "Your message has been sent successfully. Prajwal will get back to you soon.",
-      });
-      
-      // Reset form
-      reset();
-    } catch (error) {
-      console.error("Error sending email:", error);
-      toast({
-        title: "Error sending message",
-        description: "There was an error sending your message. Please try again later.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+  // Success handler
+  const handleSuccess = () => {
+    toast({
+      title: "Message sent",
+      description:
+        "Your message has been sent successfully. Prajwal will get back to you soon.",
+    });
+  };
+
+  // Error handler
+  const handleError = () => {
+    toast({
+      title: "Error",
+      description:
+        "There was an error submitting your message. Please try again later.",
+      variant: "destructive",
+    });
   };
 
   return (
@@ -96,8 +52,43 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 Have a computer vision project in mind or just want to say hello? Feel free to reach out!
               </p>
             </div>
-            
-            <div className="space-y-6 mt-8">
+
+            {/* Social links */}
+            <div className="flex flex-row gap-6 mt-8 mb-2">
+              <a
+                href="https://github.com/prajwal-code2"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="hover:text-primary transition-colors"
+              >
+                <Github size={34} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/prajwal-joshi-570935165/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="hover:text-primary transition-colors"
+              >
+                <Linkedin size={34} />
+              </a>
+              <a
+                href="https://www.upwork.com/freelancers/~0158b40f97683abbe7?mp_source=share"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Upwork"
+                className="hover:text-primary transition-colors"
+              >
+                <img
+                  src="/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png"
+                  alt="Upwork"
+                  className="w-8 h-8"
+                />
+              </a>
+            </div>
+
+            <div className="space-y-6 mt-4">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
                   <Mail size={20} />
@@ -105,13 +96,16 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 <div>
                   <h3 className="font-medium">Email</h3>
                   <p className="text-muted-foreground mt-1">
-                    <a href="mailto:prajwaljoshi421@gmail.com" className="hover:text-primary transition-colors">
+                    <a
+                      href="mailto:prajwaljoshi421@gmail.com"
+                      className="hover:text-primary transition-colors"
+                    >
                       prajwaljoshi421@gmail.com
                     </a>
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
                   <Phone size={20} />
@@ -121,7 +115,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                   <p className="text-muted-foreground mt-1">+91 9811789311</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
                   <MapPin size={20} />
@@ -133,63 +127,93 @@ const ContactSection = ({ className }: ContactSectionProps) => {
               </div>
             </div>
           </div>
-          
+
           <div className="glass-panel gradient-border p-8">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* FormSubmit HTML form */}
+            <form
+              action="https://formsubmit.co/prajwaljoshi421@gmail.com"
+              method="POST"
+              className="space-y-6"
+              target="_blank"
+              onSubmit={() => {
+                setIsSubmitting(true);
+                setTimeout(() => {
+                  setIsSubmitting(false);
+                  handleSuccess();
+                }, 1800);
+              }}
+              onError={handleError}
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">Name</label>
+                  <label htmlFor="name" className="text-sm font-medium">
+                    Name
+                  </label>
                   <Input
                     id="name"
+                    name="name"
                     placeholder="John Doe"
                     className="bg-secondary/50 border-secondary/60"
-                    {...register("name", { required: "Name is required" })}
+                    required
                   />
-                  {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">Email</label>
+                  <label htmlFor="email" className="text-sm font-medium">
+                    Email
+                  </label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="john@example.com"
                     className="bg-secondary/50 border-secondary/60"
-                    {...register("email", { 
-                      required: "Email is required",
-                      pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: "Invalid email address"
-                      }
-                    })}
+                    required
                   />
-                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                 </div>
               </div>
-              
+
               <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium">Subject</label>
+                <label htmlFor="subject" className="text-sm font-medium">
+                  Subject
+                </label>
                 <Input
                   id="subject"
+                  name="subject"
                   placeholder="Project Inquiry"
                   className="bg-secondary/50 border-secondary/60"
-                  {...register("subject", { required: "Subject is required" })}
+                  required
                 />
-                {errors.subject && <p className="text-red-500 text-xs mt-1">{errors.subject.message}</p>}
               </div>
-              
+
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">Message</label>
+                <label htmlFor="message" className="text-sm font-medium">
+                  Message
+                </label>
                 <Textarea
                   id="message"
+                  name="message"
                   placeholder="Tell me about your project..."
                   rows={5}
                   className="bg-secondary/50 border-secondary/60 resize-none"
-                  {...register("message", { required: "Message is required" })}
+                  required
                 />
-                {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
               </div>
-              
-              <Button type="submit" className="w-full gap-2" disabled={isSubmitting}>
+
+              {/* Add hidden fields for FormSubmit options */}
+              <input type="hidden" name="_captcha" value="false" />
+              <input
+                type="hidden"
+                name="_next"
+                value={typeof window !== "undefined"
+                  ? window.location.href
+                  : "/"}
+              />
+
+              <Button
+                type="submit"
+                className="w-full gap-2"
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? "Sending Message..." : "Send Message"}
                 <Send size={16} />
               </Button>
