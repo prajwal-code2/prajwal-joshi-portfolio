@@ -129,7 +129,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                   <p className="text-muted-foreground mt-1">Noida, India</p>
 
                   {/* Icon row moved below location with bigger icons and aligned left with location icon */}
-                  <div className="flex flex-row gap-4 mt-6 ml-4">
+                  <div className="flex flex-row gap-4 mt-6">
                     <a
                       href="https://github.com/prajwal-code2"
                       target="_blank"
