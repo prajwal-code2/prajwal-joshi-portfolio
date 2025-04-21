@@ -43,7 +43,7 @@ const Navbar = ({ className }: NavbarProps) => {
     <header 
       className={cn(
         "fixed top-4 left-0 right-0 z-50 py-4 px-6 md:px-10 mx-auto max-w-7xl rounded-full shadow-lg border border-border/30",
-        "bg-violet-800/70 backdrop-blur-md", // Darker background that matches the site theme
+        "bg-indigo-900/70 backdrop-blur-md", // Darker background that matches the site theme
         className
       )}
       style={{
