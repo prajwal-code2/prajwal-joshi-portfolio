@@ -129,39 +129,39 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                   <p className="text-muted-foreground mt-1">Noida, India</p>
 
                   {/* Icon row moved below location with bigger icons and aligned left with location icon */}
-                  <div className="flex items-start gap-4">
-                    <a
-                      href="https://github.com/prajwal-code2"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="GitHub"
-                      className="hover:text-primary transition-colors flex items-center"
-                    >
-                      <Github size={36} />
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/in/prajwal-joshi-570935165/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="LinkedIn"
-                      className="hover:text-primary transition-colors flex items-center"
-                    >
-                      <Linkedin size={36} />
-                    </a>
-                    <a
-                      href="https://www.upwork.com/freelancers/~0158b40f97683abbe7?mp_source=share"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Upwork"
-                      className="hover:text-primary transition-colors flex items-center"
-                    >
-                      <img
-                        src="/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png"
-                        alt="Upwork"
-                        className="w-9 h-9"
-                      />
-                    </a>
-                  </div>
+                <div className="flex flex-row gap-6 mt-6">
+                  <a
+                    href="https://github.com/prajwal-code2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="hover:text-primary transition-colors flex items-center"
+                  >
+                    <Github size={36} />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/prajwal-joshi-570935165/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="hover:text-primary transition-colors flex items-center"
+                  >
+                    <Linkedin size={36} />
+                  </a>
+                  <a
+                    href="https://www.upwork.com/freelancers/~0158b40f97683abbe7?mp_source=share"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Upwork"
+                    className="hover:text-primary transition-colors flex items-center"
+                  >
+                    <img
+                      src="/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png"
+                      alt="Upwork"
+                      className="w-9 h-9"
+                    />
+                  </a>
+                </div>
                 </div>
               </div>
             </div>
