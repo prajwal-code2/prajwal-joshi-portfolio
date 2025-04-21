@@ -1,13 +1,3 @@
-
-// Changes summary:
-// - Prevent default form submission that causes redirect by adding e.preventDefault() at start of handleSubmit (already there, but let's isolate potential cause)
-// - Fix formsubmit.co request to use fetch and prevent redirect by setting proper headers and options (already done)
-// - Confirm no form action or target attribute to avoid opening new tab (remove if any)
-// - Add icons below location info section
-// Note: The form code already uses fetch inside handleSubmit with preventDefault, so the redirect likely happens because of formsubmit.co behavior when the request is not properly handled.
-// We will ensure no form action attribute is used on form tag; also confirm that onSubmit is handled properly with async fetch.
-// Add social icons block below Location block in the right column.
-
 import { Mail, MapPin, Phone, Send, Github, Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -100,41 +90,6 @@ const ContactSection = ({ className }: ContactSectionProps) => {
               </p>
             </div>
 
-            {/* Social links */}
-            <div className="flex flex-row gap-6 mt-8 mb-2">
-              <a
-                href="https://github.com/prajwal-code2"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="hover:text-primary transition-colors"
-              >
-                <Github size={34} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/prajwal-joshi-570935165/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="hover:text-primary transition-colors"
-              >
-                <Linkedin size={34} />
-              </a>
-              <a
-                href="https://www.upwork.com/freelancers/~0158b40f97683abbe7?mp_source=share"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Upwork"
-                className="hover:text-primary transition-colors"
-              >
-                <img
-                  src="/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png"
-                  alt="Upwork"
-                  className="w-8 h-8"
-                />
-              </a>
-            </div>
-
             <div className="space-y-6 mt-4">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
@@ -171,37 +126,36 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                   <h3 className="font-medium">Location</h3>
                   <p className="text-muted-foreground mt-1">Noida, India</p>
 
-                  {/* Additional social icons below Location */}
                   <div className="flex flex-row gap-6 mt-4">
                     <a
                       href="https://github.com/prajwal-code2"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="GitHub"
-                      className="hover:text-primary transition-colors"
+                      className="hover:text-primary transition-colors flex items-center"
                     >
-                      <Github size={28} />
+                      <Github size={20} />
                     </a>
                     <a
                       href="https://www.linkedin.com/in/prajwal-joshi-570935165/"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="LinkedIn"
-                      className="hover:text-primary transition-colors"
+                      className="hover:text-primary transition-colors flex items-center"
                     >
-                      <Linkedin size={28} />
+                      <Linkedin size={20} />
                     </a>
                     <a
                       href="https://www.upwork.com/freelancers/~0158b40f97683abbe7?mp_source=share"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Upwork"
-                      className="hover:text-primary transition-colors"
+                      className="hover:text-primary transition-colors flex items-center"
                     >
                       <img
                         src="/lovable-uploads/9b01c748-7bdc-4735-8dac-944455ff1dbc.png"
                         alt="Upwork"
-                        className="w-6 h-6"
+                        className="w-5 h-5"
                       />
                     </a>
                   </div>
@@ -211,7 +165,6 @@ const ContactSection = ({ className }: ContactSectionProps) => {
           </div>
 
           <div className="glass-panel gradient-border p-8">
-            {/* Contact form using fetch */}
             <form onSubmit={handleSubmit} noValidate>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
@@ -293,4 +246,3 @@ const ContactSection = ({ className }: ContactSectionProps) => {
 };
 
 export default ContactSection;
-
