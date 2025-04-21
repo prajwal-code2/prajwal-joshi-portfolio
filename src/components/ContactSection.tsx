@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 interface ContactSectionProps {
   className?: string;
@@ -14,24 +14,65 @@ interface ContactSectionProps {
 const ContactSection = ({ className }: ContactSectionProps) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
 
-  // Success handler
-  const handleSuccess = () => {
-    toast({
-      title: "Message sent",
-      description:
-        "Your message has been sent successfully. Prajwal will get back to you soon.",
-    });
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  // Error handler
-  const handleError = () => {
-    toast({
-      title: "Error",
-      description:
-        "There was an error submitting your message. Please try again later.",
-      variant: "destructive",
-    });
+  // Handle form submission
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      // Send form data to formsubmit.co
+      const response = await fetch("https://formsubmit.co/ajax/prajwaljoshi421@gmail.com", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        // Show success toast
+        toast({
+          title: "Message sent",
+          description: "Your message has been sent successfully. Prajwal will get back to you soon."
+        });
+        
+        // Reset form data
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: ""
+        });
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      // Show error toast
+      toast({
+        title: "Error",
+        description: "There was an error submitting your message. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -129,21 +170,8 @@ const ContactSection = ({ className }: ContactSectionProps) => {
           </div>
 
           <div className="glass-panel gradient-border p-8">
-            {/* FormSubmit HTML form */}
-            <form
-              action="https://formsubmit.co/prajwaljoshi421@gmail.com"
-              method="POST"
-              className="space-y-6"
-              target="_blank"
-              onSubmit={() => {
-                setIsSubmitting(true);
-                setTimeout(() => {
-                  setIsSubmitting(false);
-                  handleSuccess();
-                }, 1800);
-              }}
-              onError={handleError}
-            >
+            {/* Contact form using fetch */}
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
@@ -152,6 +180,8 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                   <Input
                     id="name"
                     name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="John Doe"
                     className="bg-secondary/50 border-secondary/60"
                     required
@@ -165,6 +195,8 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                     id="email"
                     name="email"
                     type="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="john@example.com"
                     className="bg-secondary/50 border-secondary/60"
                     required
@@ -179,6 +211,8 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 <Input
                   id="subject"
                   name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   placeholder="Project Inquiry"
                   className="bg-secondary/50 border-secondary/60"
                   required
@@ -192,22 +226,14 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 <Textarea
                   id="message"
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Tell me about your project..."
                   rows={5}
                   className="bg-secondary/50 border-secondary/60 resize-none"
                   required
                 />
               </div>
-
-              {/* Add hidden fields for FormSubmit options */}
-              <input type="hidden" name="_captcha" value="false" />
-              <input
-                type="hidden"
-                name="_next"
-                value={typeof window !== "undefined"
-                  ? window.location.href
-                  : "/"}
-              />
 
               <Button
                 type="submit"
