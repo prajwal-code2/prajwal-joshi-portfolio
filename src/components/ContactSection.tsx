@@ -134,7 +134,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                       aria-label="GitHub"
                       className="hover:text-primary transition-colors flex items-center"
                     >
-                      <Github size={24} />
+                      <Github size={30} />
                     </a>
                     <a
                       href="https://www.linkedin.com/in/prajwal-joshi-570935165/"
