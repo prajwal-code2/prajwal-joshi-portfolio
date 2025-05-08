@@ -117,17 +117,13 @@ const HeroSection = ({ className }: HeroSectionProps) => {
       </div>
       
       {/* Code editor background image */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
-        <div className="relative w-full" style={{ maxHeight: "70vh", top: "120px" transform: "scale(0.8)", transformOrigin: "center" }}>
-          <img 
-            src="/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png" 
-            alt="Code editor" 
-            className="w-full object-cover opacity-70 h-auto"
-          />
-      
-          {/* Blurry effect at the bottom of the image */}
-          <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white/50 to-transparent backdrop-blur-md pointer-events-none" />
-        </div>
+      <div className="absolute bottom-0 left-0 right-0 z-0 overflow-hidden">
+        <img 
+          src="/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png" 
+          alt="Code editor" 
+          className="w-full object-cover opacity-70 h-auto translate-y-5 translate-x-2"
+          style={{ maxHeight: "70vh", position: 'relative', top: '120px', width: "100%", transform: "scale(0.8)", transformOrigin: "center"}}
+        />
       </div>
 
       
