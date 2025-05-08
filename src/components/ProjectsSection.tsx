@@ -1,9 +1,11 @@
+
 import { useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import ProjectModal, { Project } from "./ProjectModal";
+import DemoModal from "./DemoModal";
 
 interface ProjectsSectionProps {
   className?: string;
@@ -12,14 +14,16 @@ interface ProjectsSectionProps {
 const ProjectsSection = ({ className }: ProjectsSectionProps) => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [demoProject, setDemoProject] = useState<{title: string, url: string} | null>(null);
 
   const projects: Project[] = [
     {
       id: 1,
       title: "Object Detection System",
       description: "Real-time vehicle and object detection using YOLO",
-      image: "/lovable-uploads/4eac47c9-30f3-4758-8a31-250e9f79a30b.png", // object-detection.jpg
-      demoUrl: "#",
+      image: "/lovable-uploads/4eac47c9-30f3-4758-8a31-250e9f79a30b.png",
+      demoUrl: "https://example.com/demo/object-detection",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["YOLO", "OpenCV", "Python", "Computer Vision"],
       longDescription: "A comprehensive object detection solution built with YOLO and OpenCV. This system provides real-time detection and classification of vehicles and other objects with high accuracy. The implementation uses optimized algorithms to ensure low latency and high throughput, making it suitable for traffic monitoring and security applications."
@@ -28,8 +32,8 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 2,
       title: "Parking Time Monitor",
       description: "Automated tracking of parking duration with alerts",
-      image: "/lovable-uploads/501746e3-a9de-4ec5-b4ac-547ef63db4dd.png", // parking-automation.jpg
-      demoUrl: "#",
+      image: "/lovable-uploads/501746e3-a9de-4ec5-b4ac-547ef63db4dd.png",
+      demoUrl: "https://example.com/demo/parking-monitor",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["OpenCV", "MQTT", "Python", "Computer Vision"],
       longDescription: "An intelligent parking management system that monitors vehicle duration in parking spaces and triggers alerts for violations. The solution uses computer vision techniques to identify parking spots, detect vehicles, and track their presence over time. MQTT protocol is used for efficient communication between system components, enabling real-time notifications and seamless integration with existing parking management infrastructure."
@@ -38,8 +42,8 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
       id: 3,
       title: "Pill Counting Automation",
       description: "High-speed pill detection for packaging systems",
-      image: "/lovable-uploads/70795a08-e3a0-49f3-b155-453b83458b3e.png", // pill-counter.jpg
-      demoUrl: "#",
+      image: "/lovable-uploads/70795a08-e3a0-49f3-b155-453b83458b3e.png",
+      demoUrl: "https://example.com/demo/pill-counter",
       githubUrl: "https://github.com/prajwal-code2",
       technologies: ["Edge Computing", "OpenCV", "YOLO (Ultralytics)", "OrangePi", "ESP32CAM", "Groov Vision"],
       longDescription: "A sophisticated pill counting system for pharmaceutical packaging operations. This solution employs ultralytics YOLO for accurate detection and counting of pills at high speeds. The system is deployed on edge devices including OrangePi and ESP32CAM, with optional Groov Vision integration. The solution achieves exceptional accuracy even with varying pill shapes, sizes, and colors, while maintaining high throughput required for industrial applications."
@@ -53,6 +57,18 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
 
   const closeProjectModal = () => {
     setIsModalOpen(false);
+  };
+  
+  const openDemoModal = (project: Project) => {
+    setDemoProject({
+      title: project.title,
+      url: project.demoUrl
+    });
+    setIsDemoModalOpen(true);
+  };
+  
+  const closeDemoModal = () => {
+    setIsDemoModalOpen(false);
   };
 
   return (
@@ -115,7 +131,7 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
                     size="sm"
                     variant="outline"
                     className="gap-1"
-                    onClick={() => window.open(project.demoUrl, "_blank")}
+                    onClick={() => openDemoModal(project)}
                   >
                     <ExternalLink size={14} />
                     Demo
@@ -141,6 +157,15 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
         isOpen={isModalOpen} 
         onClose={closeProjectModal} 
       />
+      
+      {demoProject && (
+        <DemoModal
+          projectTitle={demoProject.title}
+          demoUrl={demoProject.url}
+          isOpen={isDemoModalOpen}
+          onClose={closeDemoModal}
+        />
+      )}
     </section>
   );
 };
