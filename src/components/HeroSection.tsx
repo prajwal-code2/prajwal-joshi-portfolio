@@ -124,14 +124,21 @@ const HeroSection = ({ className }: HeroSectionProps) => {
             alt="Code editor" 
             className="w-full object-cover opacity-70 h-auto rounded-3xl"
             style={{
-              filter: "blur(0.5px)", // slight edge blur
-              borderRadius: "1.5rem", // reinforce rounded corners in case Tailwind doesn't apply
+              filter: "blur(0.2px)", // minimal soft blur
+              borderRadius: "1.5rem",
             }}
           />
       
-          {/* Optional: gradient fade around edges for soft blur */}
-          <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-white/10">
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-white/10 to-transparent backdrop-blur-sm" />
+          {/* Edge-only soft gradients */}
+          <div className="pointer-events-none absolute inset-0 rounded-3xl z-10">
+            {/* Top fade */}
+            <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-white/10 to-transparent rounded-t-3xl" />
+            {/* Bottom fade */}
+            <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white/10 to-transparent rounded-b-3xl" />
+            {/* Left fade */}
+            <div className="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-white/10 to-transparent rounded-l-3xl" />
+            {/* Right fade */}
+            <div className="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-white/10 to-transparent rounded-r-3xl" />
           </div>
         </div>
       </div>
