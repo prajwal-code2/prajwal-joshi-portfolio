@@ -117,14 +117,25 @@ const HeroSection = ({ className }: HeroSectionProps) => {
       </div>
       
       {/* Code editor background image */}
-      <div className="absolute bottom-0 left-0 right-0 z-0 overflow-hidden">
-        <img 
-          src="/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png" 
-          alt="Code editor" 
-          className="w-full object-cover opacity-70 h-auto translate-y-5 translate-x-2"
-          style={{ maxHeight: "70vh", position: 'relative', top: '120px', width: "100%", transform: "scale(0.8)", transformOrigin: "center"}}
-        />
+      <div className="absolute bottom-0 left-0 right-0 z-0 overflow-hidden flex justify-center">
+        <div className="relative" style={{ maxHeight: "70vh", transform: "scale(0.8)", transformOrigin: "center" }}>
+          <img 
+            src="/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png" 
+            alt="Code editor" 
+            className="w-full object-cover opacity-70 h-auto rounded-3xl"
+            style={{
+              filter: "blur(0.5px)", // slight edge blur
+              borderRadius: "1.5rem", // reinforce rounded corners in case Tailwind doesn't apply
+            }}
+          />
+      
+          {/* Optional: gradient fade around edges for soft blur */}
+          <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-white/10">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-white/10 to-transparent backdrop-blur-sm" />
+          </div>
+        </div>
       </div>
+
 
       
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block z-10">
