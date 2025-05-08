@@ -123,7 +123,7 @@ const HeroSection = ({ className }: HeroSectionProps) => {
           alt="Code editor" 
           className="w-full object-cover opacity-70 h-auto"
 {/*           style={{ maxHeight: "70vh" }} */}
-          style={{ maxHeight: "70vh", position: 'relative', top: '20px', left: '10px' }}
+          style={{ maxHeight: "70vh", position: 'relative', top: '100px' }}
         />
       </div>
       
