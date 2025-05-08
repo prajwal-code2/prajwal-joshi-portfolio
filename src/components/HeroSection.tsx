@@ -121,11 +121,19 @@ const HeroSection = ({ className }: HeroSectionProps) => {
         <img 
           src="/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png" 
           alt="Code editor" 
-          className="w-full object-cover opacity-70 h-auto"
-{/*           style={{ maxHeight: "70vh" }} */}
-          style={{ maxHeight: "70vh", position: 'relative', top: '100px' }}
+          className="w-full object-cover opacity-70 h-auto translate-y-5 translate-x-2"
+          style={{ maxHeight: "70vh" }}
         />
       </div>
+
+{/*       <div className="absolute bottom-0 left-0 right-0 z-0 overflow-hidden">
+        <img 
+          src="/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png" 
+          alt="Code editor" 
+          className="w-full object-cover opacity-70 h-auto"
+{/*           style={{ maxHeight: "70vh" }} */}
+        />
+      </div> */}
       
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block z-10">
         <a href="#about" className="text-white hover:text-primary transition-colors">
