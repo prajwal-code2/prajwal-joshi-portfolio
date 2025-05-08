@@ -61,18 +61,17 @@ const HeroSection = ({ className }: HeroSectionProps) => {
     <section 
       id="home" 
       className={cn(
-        "min-h-screen flex flex-col justify-center px-6 pt-20 relative",
+        "min-h-screen pt-24 relative",
         className
       )}
     >
       <div className="container mx-auto max-w-4xl relative z-10">
-        <div className="space-y-6 text-center md:text-left">
-          <div className="space-y-8"> 
+        <div className="space-y-4 text-center md:text-left">
+          <div className="space-y-6"> 
             <h1 className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg">
-{/*               border-b-2 border-primary pb-1 */}
               Hello, I'm <span className="gradient-text">Prajwal Joshi</span>
             </h1>
-            <h2 className="text-xl md:text-3xl text-white min-h-10 mt-6">
+            <h2 className="text-xl md:text-3xl text-white min-h-10 mt-4">
               <span className="relative inline-block">
                 {displayText}
                 <span className="absolute -right-4 animate-cursor-blink">|</span>
@@ -80,12 +79,12 @@ const HeroSection = ({ className }: HeroSectionProps) => {
             </h2>
           </div>
           
-          <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto md:mx-0 mt-6">
+          <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto md:mx-0 mt-4">
             I build elegant, performant, and user-friendly computer vision systems. 
             Focused on creating cutting-edge AI solutions for real-world problems.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-6">
             <Button size="lg" className="group text-lg" onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}>
               View My Work
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
@@ -96,10 +95,9 @@ const HeroSection = ({ className }: HeroSectionProps) => {
           </div>
 
           {/* Social links */}
-          <div className="flex justify-center md:justify-start items-center gap-6 pt-6">
+          <div className="flex justify-center md:justify-start items-center gap-6 pt-4">
             {/* GitHub */}
             <a href="https://github.com/prajwal-code2" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-primary transition-colors" aria-label="GitHub">
-              {/* Only icon */}
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
             </a>
             {/* LinkedIn */}
@@ -116,6 +114,16 @@ const HeroSection = ({ className }: HeroSectionProps) => {
             </a>
           </div>
         </div>
+      </div>
+      
+      {/* Code editor background image */}
+      <div className="absolute bottom-0 left-0 right-0 z-0 overflow-hidden">
+        <img 
+          src="/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png" 
+          alt="Code editor" 
+          className="w-full object-cover opacity-70 h-auto"
+          style={{ maxHeight: "70vh" }}
+        />
       </div>
       
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block z-10">
