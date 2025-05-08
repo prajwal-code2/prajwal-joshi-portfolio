@@ -117,32 +117,28 @@ const HeroSection = ({ className }: HeroSectionProps) => {
       </div>
       
       {/* Code editor background image */}
-      <div className="absolute bottom-0 left-0 right-0 z-0 overflow-hidden flex justify-center">
+      <div className="absolute bottom-0 left-0 right-0 z-0 flex justify-center">
         <div 
-          className="relative" 
+          className="relative w-[90%]" 
           style={{ 
             maxHeight: "70vh", 
-            transform: "scale(0.8)", 
-            transformOrigin: "center",
-            filter: "blur(0.2px)", // Move blur here
+            overflow: "hidden", 
             borderRadius: "1.5rem",
+            filter: "blur(0.2px)"
           }}
         >
           <img 
             src="/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png" 
             alt="Code editor" 
-            className="w-full object-cover opacity-70 h-auto rounded-3xl"
-            style={{
-              borderRadius: "1.5rem", // optional, already done by class
-            }}
+            className="w-full object-cover opacity-70 h-full"
           />
       
-          {/* Edge-only soft gradients */}
+          {/* Soft edges */}
           <div className="pointer-events-none absolute inset-0 rounded-3xl z-10">
-            <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-white/10 to-transparent rounded-t-3xl" />
-            <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white/10 to-transparent rounded-b-3xl" />
-            <div className="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-white/10 to-transparent rounded-l-3xl" />
-            <div className="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-white/10 to-transparent rounded-r-3xl" />
+            <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-white/10 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white/10 to-transparent" />
+            <div className="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-white/10 to-transparent" />
+            <div className="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-white/10 to-transparent" />
           </div>
         </div>
       </div>
