@@ -18,49 +18,66 @@ const GradientCanvas = () => {
     };
 
     const drawGradient = () => {
-      // Create vibrant Holi-inspired color spots with increased brightness
+      // Create vibrant color spots with a mix of cool, dark, and bright colors
       const spots = [
-        { x: canvas.width * 0.2, y: canvas.height * 0.3, color: '#3bffcc' },  // Brighter Turquoise
-        { x: canvas.width * 0.8, y: canvas.height * 0.7, color: '#38bdf8' },  // Brighter Sky Blue
-        { x: canvas.width * 0.5, y: canvas.height * 0.5, color: '#a78bfa' },  // Brighter Purple
-        { x: canvas.width * 0.15, y: canvas.height * 0.8, color: '#fb7185' }, // Brighter Pink
-        { x: canvas.width * 0.85, y: canvas.height * 0.2, color: '#22d3ee' }, // Brighter Cyan
+        // Bright colors
+        { x: canvas.width * 0.2, y: canvas.height * 0.3, color: '#3bffcc' },  // Bright Turquoise
+        { x: canvas.width * 0.8, y: canvas.height * 0.7, color: '#38bdf8' },  // Bright Sky Blue
+        { x: canvas.width * 0.5, y: canvas.height * 0.5, color: '#a78bfa' },  // Bright Purple
+        { x: canvas.width * 0.15, y: canvas.height * 0.8, color: '#fb7185' }, // Bright Pink
+        
+        // Cool colors
+        { x: canvas.width * 0.85, y: canvas.height * 0.2, color: '#06b6d4' }, // Cyan
+        { x: canvas.width * 0.35, y: canvas.height * 0.45, color: '#3b82f6' }, // Royal Blue
+        { x: canvas.width * 0.65, y: canvas.height * 0.35, color: '#2563eb' }, // Blue
+        { x: canvas.width * 0.25, y: canvas.height * 0.6, color: '#0ea5e9' },  // Sky Blue
+        
+        // Vibrant colors
         { x: canvas.width * 0.4, y: canvas.height * 0.6, color: '#ff5757' },  // Vibrant Red
-        { x: canvas.width * 0.7, y: canvas.height * 0.4, color: '#d946ef' },  // Brighter Magenta
-        { x: canvas.width * 0.25, y: canvas.height * 0.7, color: '#a3e635' }, // Brighter Lime
-        { x: canvas.width * 0.6, y: canvas.height * 0.3, color: '#60a5fa' },  // Brighter Blue
-        { x: canvas.width * 0.35, y: canvas.height * 0.5, color: '#e879f9' }, // Brighter Fuchsia
-        { x: canvas.width * 0.55, y: canvas.height * 0.25, color: '#34d399'}, // Brighter Emerald
-        { x: canvas.width * 0.8, y: canvas.height * 0.4, color: '#fcd34d' },  // Brighter Amber
+        { x: canvas.width * 0.7, y: canvas.height * 0.4, color: '#d946ef' },  // Bright Magenta
+        { x: canvas.width * 0.25, y: canvas.height * 0.7, color: '#a3e635' }, // Bright Lime
+        { x: canvas.width * 0.6, y: canvas.height * 0.3, color: '#60a5fa' },  // Bright Blue
+        
+        // Additional vibrant colors
+        { x: canvas.width * 0.35, y: canvas.height * 0.5, color: '#e879f9' }, // Bright Fuchsia
+        { x: canvas.width * 0.55, y: canvas.height * 0.25, color: '#34d399'}, // Bright Emerald
+        { x: canvas.width * 0.8, y: canvas.height * 0.4, color: '#fcd34d' },  // Bright Amber
+        { x: canvas.width * 0.45, y: canvas.height * 0.15, color: '#f97316' }, // Orange
+        
+        // Dark and cool colors for contrast
+        { x: canvas.width * 0.1, y: canvas.height * 0.2, color: '#1e3a8a' }, // Dark Blue
+        { x: canvas.width * 0.9, y: canvas.height * 0.8, color: '#4c1d95' }, // Dark Purple
+        { x: canvas.width * 0.3, y: canvas.height * 0.9, color: '#0f766e' }, // Dark Teal
+        { x: canvas.width * 0.75, y: canvas.height * 0.15, color: '#6d28d9' }, // Indigo
       ];
 
-      // Create lighter base gradient for increased brightness
+      // Create deeper base gradient with dark colors
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, '#1e293b');  // Lighter Navy Blue
-      gradient.addColorStop(0.5, '#312e81');  // Mid Indigo
-      gradient.addColorStop(1, '#4c1d95');  // Lighter Purple
+      gradient.addColorStop(0, '#0f172a');  // Dark Navy Blue
+      gradient.addColorStop(0.5, '#1e1b4b');  // Deep Indigo
+      gradient.addColorStop(1, '#3730a3');  // Rich Purple
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Add color spots with increased opacity for more brightness
+      // Add color spots with increased size and opacity for vibrance
       spots.forEach(spot => {
         const gradient = ctx.createRadialGradient(
           spot.x, spot.y, 0,
-          spot.x, spot.y, canvas.width * 0.4
+          spot.x, spot.y, canvas.width * 0.45 // Increased radius for more color spread
         );
-        gradient.addColorStop(0, `${spot.color}a0`);  // 63% opacity (increased)
-        gradient.addColorStop(0.4, `${spot.color}70`); // 44% opacity (increased)
-        gradient.addColorStop(0.8, `${spot.color}30`); // 19% opacity (increased)
+        gradient.addColorStop(0, `${spot.color}b0`);  // 69% opacity (increased)
+        gradient.addColorStop(0.4, `${spot.color}80`); // 50% opacity (increased)
+        gradient.addColorStop(0.8, `${spot.color}40`); // 25% opacity (increased) 
         gradient.addColorStop(1, 'transparent');
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       });
 
-      // Apply softer noise texture to maintain brightness
+      // Apply balanced noise texture for dimension without losing vibrancy
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = imageData.data;
       for (let i = 0; i < data.length; i += 4) {
-        const noise = Math.random() * 20 - 10; // Reduced noise range for brighter effect
+        const noise = Math.random() * 15 - 7.5; // Subtle noise for texture without diminishing colors
         data[i] = Math.min(255, Math.max(0, data[i] + noise));
         data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise));
         data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise));
