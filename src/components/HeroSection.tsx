@@ -122,7 +122,8 @@ const HeroSection = ({ className }: HeroSectionProps) => {
           src="/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png" 
           alt="Code editor" 
           className="w-full object-cover opacity-70 h-auto"
-          style={{ maxHeight: "70vh" }}
+{/*           style={{ maxHeight: "70vh" }} */}
+          style={{ maxHeight: "70vh", position: 'relative', top: '20px', left: '10px' }}
         />
       </div>
       
