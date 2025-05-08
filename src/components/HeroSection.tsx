@@ -121,10 +121,10 @@ const HeroSection = ({ className }: HeroSectionProps) => {
         <div 
           className="relative w-[80%]" 
           style={{ 
-            maxHeight: "60vh", 
+            maxHeight: "65vh", 
             overflow: "hidden", 
             borderRadius: "1.5rem",
-            filter: "blur(0.2px)"
+            filter: "blur(0.8px)"
           }}
         >
           <img 
