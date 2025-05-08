@@ -18,45 +18,49 @@ const GradientCanvas = () => {
     };
 
     const drawGradient = () => {
-      // Create multiple Holi-inspired color spots with bright, cool colors
+      // Create vibrant Holi-inspired color spots with increased variety and intensity
       const spots = [
-        { x: canvas.width * 0.2, y: canvas.height * 0.3, color: '#00ff87' },  // Bright Green
+        { x: canvas.width * 0.2, y: canvas.height * 0.3, color: '#00ffaa' },  // Bright Turquoise
         { x: canvas.width * 0.8, y: canvas.height * 0.7, color: '#0ea5e9' },  // Sky Blue
-        { x: canvas.width * 0.5, y: canvas.height * 0.5, color: '#818cf8' },  // Indigo
-        { x: canvas.width * 0.15, y: canvas.height * 0.8, color: '#e879f9' }, // Bright Pink
-        { x: canvas.width * 0.85, y: canvas.height * 0.2, color: '#22d3ee' }, // Cyan
-        { x: canvas.width * 0.4, y: canvas.height * 0.6, color: '#ff5757' },  // Bright Red
-        { x: canvas.width * 0.7, y: canvas.height * 0.4, color: '#a78bfa' },  // Purple
-        { x: canvas.width * 0.25, y: canvas.height * 0.7, color: '#86efac' }, // Light Green
-        { x: canvas.width * 0.6, y: canvas.height * 0.3, color: '#38bdf8' },  // Light Blue
-        { x: canvas.width * 0.35, y: canvas.height * 0.5, color: '#c084fc' }  // Violet
+        { x: canvas.width * 0.5, y: canvas.height * 0.5, color: '#8b5cf6' },  // Vibrant Purple
+        { x: canvas.width * 0.15, y: canvas.height * 0.8, color: '#f472b6' }, // Hot Pink
+        { x: canvas.width * 0.85, y: canvas.height * 0.2, color: '#06b6d4' }, // Bright Cyan
+        { x: canvas.width * 0.4, y: canvas.height * 0.6, color: '#f43f5e' },  // Vivid Red
+        { x: canvas.width * 0.7, y: canvas.height * 0.4, color: '#c026d3' },  // Magenta
+        { x: canvas.width * 0.25, y: canvas.height * 0.7, color: '#84cc16' }, // Lime Green
+        { x: canvas.width * 0.6, y: canvas.height * 0.3, color: '#3b82f6' },  // Royal Blue
+        { x: canvas.width * 0.35, y: canvas.height * 0.5, color: '#d946ef' }, // Fuchsia
+        { x: canvas.width * 0.55, y: canvas.height * 0.25, color: '#22c55e'}, // Emerald
+        { x: canvas.width * 0.8, y: canvas.height * 0.4, color: '#fbbf24' },  // Amber
       ];
 
-      // Create cool base gradient
+      // Create deep, rich base gradient
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
       gradient.addColorStop(0, '#0f172a');  // Navy Blue
-      gradient.addColorStop(1, '#1e293b');  // Slate Blue
+      gradient.addColorStop(0.5, '#1e1b4b');  // Deep Indigo
+      gradient.addColorStop(1, '#312e81');  // Rich Purple
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Add color spots with increased size and overlap
+      // Add color spots with increased size, overlap and brightness
       spots.forEach(spot => {
         const gradient = ctx.createRadialGradient(
           spot.x, spot.y, 0,
-          spot.x, spot.y, canvas.width * 0.35
+          spot.x, spot.y, canvas.width * 0.4 // Increased radius
         );
-        gradient.addColorStop(0, `${spot.color}70`);  // 44% opacity
-        gradient.addColorStop(0.6, `${spot.color}30`); // 19% opacity
+        gradient.addColorStop(0, `${spot.color}90`);  // 56% opacity
+        gradient.addColorStop(0.4, `${spot.color}50`); // 31% opacity
+        gradient.addColorStop(0.8, `${spot.color}20`); // 12% opacity
         gradient.addColorStop(1, 'transparent');
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       });
 
-      // Add stronger noise texture for a powdery effect
+      // Apply stronger powdery texture
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = imageData.data;
       for (let i = 0; i < data.length; i += 4) {
-        const noise = Math.random() * 25 - 12.5; // Increased noise range
+        const noise = Math.random() * 30 - 15; // Enhanced noise range
         data[i] = Math.min(255, Math.max(0, data[i] + noise));
         data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise));
         data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise));
