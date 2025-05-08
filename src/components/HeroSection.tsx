@@ -117,11 +117,11 @@ const HeroSection = ({ className }: HeroSectionProps) => {
       </div>
       
       {/* Code editor background image */}
-      <div className="absolute bottom-0 left-0 right-0 z-0 flex justify-center">
+      <div className="absolute left-0 right-0 z-0 flex justify-center" style={{ bottom: "-2rem" }}>
         <div 
-          className="relative w-[90%]" 
+          className="relative w-[80%]" 
           style={{ 
-            maxHeight: "70vh", 
+            maxHeight: "60vh", 
             overflow: "hidden", 
             borderRadius: "1.5rem",
             filter: "blur(0.2px)"
@@ -133,7 +133,7 @@ const HeroSection = ({ className }: HeroSectionProps) => {
             className="w-full object-cover opacity-70 h-full"
           />
       
-          {/* Soft edges */}
+          {/* Soft edge gradients */}
           <div className="pointer-events-none absolute inset-0 rounded-3xl z-10">
             <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-white/10 to-transparent" />
             <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white/10 to-transparent" />
