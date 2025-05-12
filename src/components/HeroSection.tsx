@@ -18,6 +18,7 @@ const HeroSection = ({ className }: HeroSectionProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [roleIndex, setRoleIndex] = useState(0);
   const [isWaiting, setIsWaiting] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const typingSpeed = 100;
   const deleteSpeed = 50;
   const waitTime = 1500;
@@ -57,11 +58,18 @@ const HeroSection = ({ className }: HeroSectionProps) => {
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, roleIndex, isWaiting]);
 
+  // Preload the image
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png";
+    img.onload = () => setImageLoaded(true);
+  }, []);
+
   return (
     <section 
       id="home" 
       className={cn(
-        "min-h-screen pt-24 relative",
+        "min-h-screen pt-16 relative",
         className
       )}
     >
@@ -116,35 +124,41 @@ const HeroSection = ({ className }: HeroSectionProps) => {
         </div>
       </div>
       
-      {/* Code editor background image */}
-      <div className="absolute left-0 right-0 z-0 flex justify-center" style={{ bottom: "-2rem" }}>
+      {/* Code editor background image with loading state and responsiveness */}
+      <div className="absolute left-0 right-0 w-full z-0 flex justify-center" style={{ bottom: "0" }}>
         <div 
-          className="relative w-[80%]" 
-          style={{ 
-            maxHeight: "65vh", 
-            overflow: "hidden", 
-            borderRadius: "1.5rem",
-            filter: "blur(0.8px)"
+          className={cn(
+            "relative w-full h-[50vh] md:h-[60vh] lg:h-[65vh] transition-opacity duration-500",
+            imageLoaded ? "opacity-70" : "opacity-0"
+          )}
+          style={{
+            borderTopLeftRadius: "1.5rem",
+            borderTopRightRadius: "1.5rem",
+            overflow: "hidden",
           }}
         >
+          {!imageLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+            </div>
+          )}
           <img 
             src="/lovable-uploads/2be5afe3-9b68-40cc-819b-ca14d9df7292.png" 
             alt="Code editor" 
-            className="w-full object-cover opacity-70 h-full"
+            className="w-full h-full object-cover"
+            loading="eager"
+            onLoad={() => setImageLoaded(true)}
           />
       
           {/* Soft edge gradients */}
-          <div className="pointer-events-none absolute inset-0 rounded-3xl z-10">
-            <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-white/10 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white/10 to-transparent" />
-            <div className="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-white/10 to-transparent" />
-            <div className="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-white/10 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 rounded-t-3xl z-10">
+            <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-background to-transparent" />
+            <div className="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-background to-transparent" />
+            <div className="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-background to-transparent" />
           </div>
         </div>
       </div>
 
-
-      
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block z-10">
         <a href="#about" className="text-white hover:text-primary transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg>
