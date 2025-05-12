@@ -125,13 +125,14 @@ const HeroSection = ({ className }: HeroSectionProps) => {
       </div>
       
       {/* Code editor background image with loading state and responsiveness */}
-      <div className="absolute left-0 right-0 w-full z-0 flex justify-center" style={{ bottom: "0" }}>
+      <div className="absolute left-0 right-0 bottom-0 flex justify-center w-full z-0">
         <div 
           className={cn(
-            "relative w-full h-[50vh] md:h-[60vh] lg:h-[65vh] transition-opacity duration-500",
+            "relative w-[90%] max-w-6xl transition-opacity duration-500",
             imageLoaded ? "opacity-70" : "opacity-0"
           )}
           style={{
+            height: "calc(55vh + 5vw)",
             borderTopLeftRadius: "1.5rem",
             borderTopRightRadius: "1.5rem",
             overflow: "hidden",
