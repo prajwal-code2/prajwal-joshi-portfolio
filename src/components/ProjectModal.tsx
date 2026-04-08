@@ -63,14 +63,6 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
             
             <div className="flex gap-4 mt-6">
               <Button 
-                variant="default" 
-                className="gap-2"
-                onClick={() => window.open(project.demoUrl, "_blank")}
-              >
-                <ExternalLink size={16} />
-                Live Demo
-              </Button>
-              <Button 
                 variant="outline" 
                 className="gap-2"
                 onClick={() => window.open(project.githubUrl, "_blank")}
