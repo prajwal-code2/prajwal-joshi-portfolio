@@ -127,15 +127,6 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
                   >
                     View Details
                   </Button>
-                  <Button 
-                    size="sm"
-                    variant="ghost"
-                    className="gap-1"
-                    onClick={() => window.open(project.githubUrl, "_blank")}
-                  >
-                    <Github size={14} />
-                    Code
-                  </Button>
                 </div>
               </div>
             </div>
