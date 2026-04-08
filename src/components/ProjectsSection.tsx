@@ -121,22 +121,6 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
                 
                 <div className="flex gap-3 pt-2">
                   <Button 
-                    size="sm" 
-                    variant="default"
-                    onClick={() => openProjectModal(project)}
-                  >
-                    View Details
-                  </Button>
-                  <Button 
-                    size="sm"
-                    variant="outline"
-                    className="gap-1"
-                    onClick={() => openDemoModal(project)}
-                  >
-                    <ExternalLink size={14} />
-                    Demo
-                  </Button>
-                  <Button 
                     size="sm"
                     variant="ghost"
                     className="gap-1"
