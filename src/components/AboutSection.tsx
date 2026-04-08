@@ -59,7 +59,7 @@ const AboutSection = ({ className }: AboutSectionProps) => {
                 in every project.
               </p>
               <p>
-                Currently serving as Head of Technology at Insight Fusion Analytics since June 2024, I've also collaborated on 
+                Currently serving as Software Developer and Computer Vision Specialist in Unidoses, I've also collaborated on 
                 numerous client projects through Upwork.
               </p>
             </div>
